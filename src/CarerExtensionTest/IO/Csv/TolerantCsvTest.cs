@@ -1,0 +1,117 @@
+﻿namespace CarerExtensionTest.IO.Csv;
+
+[TestClass]
+public class TolerantCsvTest
+{
+    private const string ROOT_DIR = @"test\tolerant_csv_test";
+
+    [ClassInitialize]
+    public static void Initialize(TestContext _)
+    {
+        Directory.CreateDirectory(ROOT_DIR);
+    }
+
+    [TestMethod]
+    public void Read01()
+    {
+        var dir = $@"{ROOT_DIR}\read1";
+        var readFile = $@"{dir}\read.csv";
+
+        #region pre-process
+        Directory.CreateDirectory(dir);
+        File.WriteAllText(readFile, CsvContent01());
+        #endregion
+
+        using var csv = TestCsvFile.Read(readFile);
+
+        Assert.AreEqual(6, csv.Rows.Count);
+        {
+            var row = csv.Rows[0];
+            Assert.AreEqual(1, row.IntValue);
+            Assert.AreEqual(1.5, row.DoubleValue);
+            Assert.AreEqual("string1", row.StringValue);
+            Assert.AreEqual(new(2001, 1, 1), row.DateTimeValue);
+            Assert.IsTrue(row.BoolValue);
+        }
+        {
+            var row = csv.Rows[5];
+            Assert.AreEqual(6, row.IntValue);
+            Assert.AreEqual(6.5, row.DoubleValue);
+            Assert.AreEqual("string6", row.StringValue);
+            Assert.AreEqual(new(2006, 6, 6), row.DateTimeValue);
+            Assert.IsNull(row.BoolValue);
+        }
+    }
+
+    [TestMethod]
+    public void Read02()
+    {
+        var dir = $@"{ROOT_DIR}\read2";
+        var readFile = $@"{dir}\read.csv";
+
+        #region pre-process
+        Directory.CreateDirectory(dir);
+        File.WriteAllText(readFile, IllegalCsvContent01());
+        #endregion
+
+        using var csv = TestTolerantCsvFile.Read(readFile);
+        Assert.AreEqual(0, csv.Rows.Count);
+    }
+
+    [TestMethod]
+    public void Write01()
+    {
+        var dir = $@"{ROOT_DIR}\write1";
+        var writeFile = $@"{dir}\test.csv";
+
+        #region pre-process
+        Directory.CreateDirectory(dir);
+        #endregion
+
+        var csv = new TestCsvFile(writeFile);
+        csv.Rows.AddRange([
+            new(1, 1.5, "string1", new(2001, 1, 1), false),
+            new(2, 2.5, "string2", new(2002, 2, 2), true),
+        ]);
+        csv.Write();
+
+        Assert.IsTrue(File.Exists(writeFile));
+    }
+
+    [TestMethod]
+    public void Write02()
+    {
+        var dir = $@"{ROOT_DIR}\write2";
+        var readFile = $@"{dir}\read.csv";
+        var writeFile = $@"{dir}\test.csv";
+
+        #region pre-process
+        Directory.CreateDirectory(dir);
+        File.WriteAllText(readFile, CsvContent01());
+        #endregion
+
+        using var csv = TestCsvFile.Read(readFile);
+        csv.Rows.AddRange([new(1, 1.5, "string1", new(2001, 1, 1), false)]);
+        csv.Write(writeFile);
+
+        Assert.IsTrue(File.Exists(readFile));
+        Assert.IsTrue(File.Exists(writeFile));
+    }
+
+    private static string CsvContent01() => @"intItem,doubleItem,stringItem,dateItem,boolItem
+1,1.5,string1,20010101000000,t
+,2.5,string2,20020202000000,f
+3,,string3,20030303000000,t
+4,4.5,,20040404000000,f
+5,5.5,string5,,t
+6,6.5,string6,20060606000000,
+";
+
+    private static string IllegalCsvContent01() => @"intItem,doubleItem,stringItem,dateItem,boolItem
+A,1.5,string1,20010101000000,f
+2,A,string2,20020202000000,f
+3,3.5,string3,A,t
+4,4.5,str
+ing4,20040404000000,A
+";
+}
