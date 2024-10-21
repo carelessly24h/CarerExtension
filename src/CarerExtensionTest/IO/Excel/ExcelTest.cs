@@ -25,12 +25,12 @@ public class ExcelTest
         {
             var sheet = (TestExcelSheet1)sheets.ElementAt(0);
             Assert.AreEqual(new(2024, 6, 10), sheet.CreateAt);
-            Assert.AreEqual("テストユーザ", sheet.Creator);
+            Assert.AreEqual("TestUser1", sheet.Creator);
 
             {
                 var item = sheet.Items.ElementAt(0);
                 Assert.AreEqual(1, item.No);
-                Assert.AreEqual("品名1", item.Name);
+                Assert.AreEqual("Item1", item.Name);
                 Assert.AreEqual(5, item.Quantity);
                 Assert.AreEqual(new(2024, 1, 1), item.At);
                 Assert.IsTrue(item.Enable);
@@ -38,7 +38,7 @@ public class ExcelTest
             {
                 var item = sheet.Items.ElementAt(4);
                 Assert.AreEqual(5, item.No);
-                Assert.AreEqual("品名5", item.Name);
+                Assert.AreEqual("Item5", item.Name);
                 Assert.AreEqual(9, item.Quantity);
                 Assert.AreEqual(new(2024, 5, 1), item.At);
                 Assert.IsTrue(item.Enable);
@@ -59,26 +59,26 @@ public class ExcelTest
         {
             var sheet = (TestExcelSheet2)sheets.ElementAt(1);
             Assert.AreEqual(new(2024, 6, 10), sheet.CreateAt);
-            Assert.AreEqual("テストユーザ", sheet.Creator);
+            Assert.AreEqual("TestUser2", sheet.Creator);
 
             {
                 var point = sheet.MeasurePoints.ElementAt(0);
-                Assert.AreEqual("ポイント1", point.Name);
+                Assert.AreEqual("Point1", point.Name);
                 Assert.AreEqual(1000, point.ValueA);
                 Assert.AreEqual(1001, point.ValueB);
                 Assert.AreEqual(1000.5, point.Average);
             }
             {
                 var point = sheet.MeasurePoints.ElementAt(2);
-                Assert.AreEqual("ポイント3", point.Name);
+                Assert.AreEqual("Point3", point.Name);
                 Assert.AreEqual(4000, point.ValueA);
                 Assert.AreEqual(4001, point.ValueB);
                 Assert.AreEqual(4000.5, point.Average);
             }
 
-            Assert.AreEqual("P3", sheet.PointId);
-            Assert.AreEqual("ポイント3", sheet.PointName);
-            Assert.AreEqual("テスト棟3F会議室", sheet.PointAddress);
+            Assert.AreEqual("P03", sheet.PointId);
+            Assert.AreEqual("Point3", sheet.PointName);
+            Assert.AreEqual("Tower No.3 A Room", sheet.PointAddress);
             Assert.AreEqual(1005.1, sheet.MinValue);
             Assert.AreEqual(1050.5, sheet.MaxValue);
         }

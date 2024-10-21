@@ -2,16 +2,16 @@
 
 namespace CarerExtension.Utilities.LegacyDataFormatter;
 
-public struct StringSlicer(string buffer)
+public ref struct StringSlicer(ReadOnlySpan<char> buffer)
 {
     #region variable
     private int offset = 0;
     #endregion
 
     #region property
-    private readonly string Buffer => buffer;
+    private readonly ReadOnlySpan<char> Buffer { get; } = buffer;
 
-    public readonly int BufferLength => buffer.Length;
+    public readonly int BufferLength => Buffer.Length;
 
     public readonly bool IsEmpty => BufferLength <= offset;
 
@@ -36,11 +36,17 @@ public struct StringSlicer(string buffer)
     #region method
     public readonly StringSlicer Clone() => new(this);
 
-    public readonly string Peek(int count = 1) =>
-        buffer.SafetySubstring(offset, count) ?? string.Empty;
+    public readonly string Peek(int count = 1)
+    {
+        var s = Buffer.SafetySlice(offset, count);
+        return new string(s);
+    }
 
-    public readonly string PeekAll() =>
-        buffer.SafetySubstring(offset) ?? string.Empty;
+    public readonly string PeekAll()
+    {
+        var s = Buffer.SafetySlice(offset);
+        return new string(s);
+    }
 
     public StringSlicer Refresh()
     {
@@ -50,8 +56,7 @@ public struct StringSlicer(string buffer)
 
     public StringSlicer Shift(int count)
     {
-        var newOffset = offset + count;
-        offset = Math.Clamp(newOffset, 0, BufferLength);
+        offset = Math.Clamp(offset + count, 0, BufferLength);
         return this;
     }
 

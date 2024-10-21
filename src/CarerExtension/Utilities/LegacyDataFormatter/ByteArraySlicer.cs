@@ -1,19 +1,19 @@
-﻿namespace CarerExtension.Utilities.LegacyDataFormatter;
+﻿using CarerExtension.Extensions;
 
-public struct ByteArraySlicer(IEnumerable<byte> buffer)
+namespace CarerExtension.Utilities.LegacyDataFormatter;
+
+public ref struct ByteArraySlicer(ReadOnlySpan<byte> buffer)
 {
     #region variable
     private int offset = 0;
-
-    private readonly int length = buffer.Count();
     #endregion
 
     #region property
-    private readonly IEnumerable<byte> Buffer => buffer;
+    public readonly ReadOnlySpan<byte> Buffer { get; } = buffer;
 
-    public readonly int BufferLength => length;
+    public readonly int BufferLength { get; } = buffer.Length;
 
-    public readonly bool IsEmpty => buffer.Count() <= offset;
+    public readonly bool IsEmpty => BufferLength <= offset;
 
     public readonly bool IsPresent => !IsEmpty;
     #endregion
@@ -36,11 +36,10 @@ public struct ByteArraySlicer(IEnumerable<byte> buffer)
     #region method
     public readonly ByteArraySlicer Clone() => new(this);
 
-    public readonly IEnumerable<byte> Peek(int count = 1) =>
-        buffer.Skip(offset).Take(count) ?? Array.Empty<byte>();
+    public readonly ReadOnlySpan<byte> Peek(int count = 1) =>
+        Buffer.SafetySlice(offset, count);
 
-    public readonly IEnumerable<byte> PeekAll() =>
-        buffer.Skip(offset) ?? Array.Empty<byte>();
+    public readonly ReadOnlySpan<byte> PeekAll() => Buffer[offset..];
 
     public ByteArraySlicer Refresh()
     {
@@ -50,22 +49,21 @@ public struct ByteArraySlicer(IEnumerable<byte> buffer)
 
     public ByteArraySlicer Shift(int count)
     {
-        var newOffset = offset + count;
-        offset = Math.Clamp(newOffset, 0, BufferLength);
+        offset = Math.Clamp(offset + count, 0, BufferLength);
         return this;
     }
 
-    public IEnumerable<byte> Slice(int count = 1)
+    public ReadOnlySpan<byte> Slice(int count = 1)
     {
         var s = Peek(count);
         Shift(count);
         return s;
     }
 
-    public IEnumerable<byte> SliceAll()
+    public ReadOnlySpan<byte> SliceAll()
     {
         var s = PeekAll();
-        Shift(s.Count());
+        Shift(s.Length);
         return s;
     }
     #endregion

@@ -31,7 +31,7 @@ internal class TestExcelSheet2(IWorkbook workbook) : ExcelSheetIO(workbook)
 
     public override void Read()
     {
-        Select("テストシート2");
+        Select("TestSheet2");
         Store();
         ReflectionRead();
     }
@@ -77,7 +77,7 @@ internal class TestExcelSheet2(IWorkbook workbook) : ExcelSheetIO(workbook)
 
         PointId = "Po001";
         PointName = "TestPoint1";
-        PointAddress = "Tower No.3 A room";
+        PointAddress = "Tower No.3 B room";
         MinValue = 5.0;
         MaxValue = 10.5;
     }

@@ -30,15 +30,15 @@ public class ByteArraySlicerTest
         {
             var actual = s.Peek(2);
 
-            Assert.AreEqual(2, actual.Count());
-            Assert.AreEqual(0, actual.ElementAt(0));
-            Assert.AreEqual(1, actual.ElementAt(1));
+            Assert.AreEqual(2, actual.Length);
+            Assert.AreEqual(0, actual[0]);
+            Assert.AreEqual(1, actual[1]);
         }
         {
             var actual = s.Peek(2);
 
-            Assert.AreEqual(2, actual.Count());
-            Assert.AreEqual(0, actual.ElementAt(0));
+            Assert.AreEqual(2, actual.Length);
+            Assert.AreEqual(0, actual[0]);
         }
     }
 
@@ -49,15 +49,15 @@ public class ByteArraySlicerTest
         {
             var actual = s.PeekAll();
 
-            Assert.AreEqual(3, actual.Count());
-            Assert.AreEqual(0, actual.ElementAt(0));
-            Assert.AreEqual(2, actual.ElementAt(2));
+            Assert.AreEqual(3, actual.Length);
+            Assert.AreEqual(0, actual[0]);
+            Assert.AreEqual(2, actual[2]);
         }
         {
             var actual = s.PeekAll();
 
-            Assert.AreEqual(3, actual.Count());
-            Assert.AreEqual(0, actual.ElementAt(0));
+            Assert.AreEqual(3, actual.Length);
+            Assert.AreEqual(0, actual[0]);
         }
     }
 
@@ -70,25 +70,24 @@ public class ByteArraySlicerTest
         Assert.IsTrue(s.IsEmpty);
         s.Refresh();
 
-        Assert.AreEqual(0, s.Peek(1).ElementAt(0));
+        Assert.AreEqual(0, s.Peek(1)[0]);
     }
 
     [TestMethod]
     public void Shift01()
     {
-        var s = new ByteArraySlicer([0, 1]);
-        s.Shift(1);
+        {
+            var s = new ByteArraySlicer([0, 1]);
+            s.Shift(1);
 
-        Assert.AreEqual(1, s.Peek(1).ElementAt(0));
-    }
+            Assert.AreEqual(1, s.Peek(1)[0]);
+        }
+        {
+            var s = new ByteArraySlicer([0, 1, 2]);
+            s.Shift(10);
 
-    [TestMethod]
-    public void Shift02()
-    {
-        var s = new ByteArraySlicer([0, 1, 2]);
-        s.Shift(10);
-
-        Assert.IsTrue(s.IsEmpty);
+            Assert.IsTrue(s.IsEmpty);
+        }
     }
 
     [TestMethod]
@@ -98,9 +97,9 @@ public class ByteArraySlicerTest
         var s1 = s + 1;
         var s2 = s1 - 1;
 
-        Assert.AreEqual(0, s.Peek(1).ElementAt(0));
-        Assert.AreEqual(1, s1.Peek(1).ElementAt(0));
-        Assert.AreEqual(0, s2.Peek(1).ElementAt(0));
+        Assert.AreEqual(0, s.Peek(1)[0]);
+        Assert.AreEqual(1, s1.Peek(1)[0]);
+        Assert.AreEqual(0, s2.Peek(1)[0]);
     }
 
     [TestMethod]
@@ -110,20 +109,20 @@ public class ByteArraySlicerTest
         {
             var actual = s.Slice(2);
 
-            Assert.AreEqual(2, actual.Count());
-            Assert.AreEqual(0, actual.ElementAt(0));
-            Assert.AreEqual(1, actual.ElementAt(1));
+            Assert.AreEqual(2, actual.Length);
+            Assert.AreEqual(0, actual[0]);
+            Assert.AreEqual(1, actual[1]);
         }
         {
             var actual = s.Slice(2);
 
-            Assert.AreEqual(2, actual.Count());
-            Assert.AreEqual(2, actual.ElementAt(0));
-            Assert.AreEqual(3, actual.ElementAt(1));
+            Assert.AreEqual(2, actual.Length);
+            Assert.AreEqual(2, actual[0]);
+            Assert.AreEqual(3, actual[1]);
         }
         {
             var actual = s.Slice(2);
-            Assert.AreEqual(0, actual.Count());
+            Assert.AreEqual(0, actual.Length);
         }
     }
 
@@ -134,13 +133,13 @@ public class ByteArraySlicerTest
         {
             var actual = s.SliceAll();
 
-            Assert.AreEqual(3, actual.Count());
-            Assert.AreEqual(0, actual.ElementAt(0));
-            Assert.AreEqual(2, actual.ElementAt(2));
+            Assert.AreEqual(3, actual.Length);
+            Assert.AreEqual(0, actual[0]);
+            Assert.AreEqual(2, actual[2]);
         }
         {
             var actual = s.SliceAll();
-            Assert.AreEqual(0, actual.Count());
+            Assert.AreEqual(0, actual.Length);
         }
     }
 }
