@@ -9,7 +9,7 @@ public class SpanExtensionTest
     {
         Span<int> arr = [1, 2, 3, 4, 5];
 
-        Assert.IsTrue(arr.All(a => a < 10));
+        Assert.IsTrue(arr.All(a => a <= 5));
         Assert.IsFalse(arr.All(a => a < 5));
     }
 
@@ -18,7 +18,7 @@ public class SpanExtensionTest
     {
         ReadOnlySpan<int> arr = [1, 2, 3, 4, 5];
 
-        Assert.IsTrue(arr.All(a => a < 10));
+        Assert.IsTrue(arr.All(a => a <= 5));
         Assert.IsFalse(arr.All(a => a < 5));
     }
     #endregion
@@ -27,19 +27,32 @@ public class SpanExtensionTest
     [TestMethod]
     public void Any01()
     {
-        Span<int> arr = [1, 2, 3, 4, 5];
-
-        Assert.IsTrue(arr.Any(a => a == 1));
-        Assert.IsFalse(arr.All(a => a == 0));
+        {
+            Span<int> arr = [1];
+            Assert.IsTrue(arr.Any());
+        }
+        {
+            Span<int> arr = [];
+            Assert.IsFalse(arr.Any());
+        }
     }
 
     [TestMethod]
     public void Any02()
     {
+        Span<int> arr = [1, 2, 3, 4, 5];
+
+        Assert.IsTrue(arr.Any(a => a == 1));
+        Assert.IsFalse(arr.Any(a => a == 0));
+    }
+
+    [TestMethod]
+    public void Any03()
+    {
         ReadOnlySpan<int> arr = [1, 2, 3, 4, 5];
 
         Assert.IsTrue(arr.Any(a => a == 1));
-        Assert.IsFalse(arr.All(a => a == 0));
+        Assert.IsFalse(arr.Any(a => a == 0));
     }
     #endregion
 

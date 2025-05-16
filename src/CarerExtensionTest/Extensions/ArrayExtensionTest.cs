@@ -90,4 +90,56 @@ public class ArrayExtensionTest
         }
     }
     #endregion
+
+    #region ToBoolean
+    [TestMethod]
+    public void ToBoolean01()
+    {
+        byte[] value = [0x01, 0x00, 0x80];
+        Assert.IsTrue(value.ToBoolean(0));
+        Assert.IsTrue(value.ToBoolean(2));
+    }
+
+    [TestMethod]
+    public void ToBoolean02()
+    {
+        byte[] value = [0, 1, 0];
+        Assert.IsFalse(value.ToBoolean(0));
+        Assert.IsFalse(value.ToBoolean(2));
+    }
+    #endregion
+
+    #region ToInt32
+    [TestMethod]
+    public void ToInt32_01()
+    {
+        {
+            byte[] value = [1, 0, 0, 0];
+            var excepted = 1;
+            Assert.AreEqual(excepted, value.ToInt32(0));
+        }
+        {
+            byte[] value = [0, 0, 0, 1];
+            var expected = 1 << 24;
+            Assert.AreEqual(expected, value.ToInt32(0));
+        }
+    }
+    #endregion
+
+    #region ToInt64
+    [TestMethod]
+    public void ToInt64_01()
+    {
+        {
+            byte[] value = [1, 0, 0, 0, 0, 0, 0, 0];
+            var excepted = 1L;
+            Assert.AreEqual(excepted, value.ToInt64(0));
+        }
+        {
+            byte[] value = [0, 0, 0, 0, 0, 0, 0, 1];
+            var expected = 1L << 56;
+            Assert.AreEqual(expected, value.ToInt64(0));
+        }
+    }
+    #endregion
 }

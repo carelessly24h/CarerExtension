@@ -9,13 +9,19 @@ public class IComparableExtensionTest
     {
         {
             // in range.
-            Assert.AreEqual(9, 9.Clamp(9, 11));
-            Assert.AreEqual(11, 11.Clamp(9, 11));
+            Assert.AreEqual(8, 8.Clamp(8, 10));
+            Assert.AreEqual(10, 10.Clamp(8, 10));
+
+            Assert.AreEqual(8, 8.Clamp(10, 8));
+            Assert.AreEqual(10, 10.Clamp(10, 8));
         }
         {
             // out of range.
-            Assert.AreEqual(9, 8.Clamp(9, 11));
-            Assert.AreEqual(11, 12.Clamp(9, 11));
+            Assert.AreEqual(8, 7.Clamp(8, 10));
+            Assert.AreEqual(10, 11.Clamp(8, 10));
+
+            Assert.AreEqual(8, 7.Clamp(10, 8));
+            Assert.AreEqual(10, 11.Clamp(10, 8));
         }
     }
 
@@ -41,13 +47,19 @@ public class IComparableExtensionTest
     {
         {
             // in range.
-            Assert.IsTrue(9.IsBetween(9, 11));
-            Assert.IsTrue(11.IsBetween(9, 11));
+            Assert.IsTrue(9.IsBetween(8, 10));
+            Assert.IsTrue(10.IsBetween(8, 10));
+
+            Assert.IsTrue(8.IsBetween(10, 8));
+            Assert.IsTrue(10.IsBetween(10, 8));
         }
         {
             // out of range.
-            Assert.IsFalse(8.IsBetween(9, 11));
-            Assert.IsFalse(12.IsBetween(9, 11));
+            Assert.IsFalse(7.IsBetween(8, 10));
+            Assert.IsFalse(11.IsBetween(8, 10));
+
+            Assert.IsFalse(7.IsBetween(10, 8));
+            Assert.IsFalse(11.IsBetween(10, 8));
         }
     }
 
@@ -94,11 +106,11 @@ public class IComparableExtensionTest
     [TestMethod]
     public void IsInclude02()
     {
-        string? s = null;
-    var r=    s.IsInclude(["a", "b", null]);
-
         Assert.IsTrue("ab".IsInclude(["aa", "bb", "ab"]));
         Assert.IsFalse("ab".IsInclude(["aa", "bb"]));
+
+        string? s = null;
+        Assert.IsTrue(s.IsInclude(["a", "b", null]));
     }
     #endregion
 }

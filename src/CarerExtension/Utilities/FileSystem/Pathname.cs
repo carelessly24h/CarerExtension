@@ -216,7 +216,7 @@ public readonly struct Pathname(string path)
 
     public void Write(string contents, Encoding encoding) => File.WriteAllText(FullPath, contents, encoding);
 
-    public void Write(IEnumerable<byte> buffer) => File.WriteAllBytes(FullPath, buffer.ToArray());
+    public void Write(IEnumerable<byte> buffer) => File.WriteAllBytes(FullPath, [.. buffer]);
 
     public void Write(ReadOnlySpan<byte> buffer)
     {

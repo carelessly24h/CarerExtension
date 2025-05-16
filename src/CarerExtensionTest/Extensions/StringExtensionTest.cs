@@ -30,6 +30,7 @@ public class StringExtensionTest
     [TestMethod]
     public void First01()
     {
+        Assert.AreEqual("", "abc".First(0));
         Assert.AreEqual("a", "abc".First(1));
         Assert.AreEqual("abc", "abc".First(3));
     }
@@ -220,7 +221,7 @@ bb
             ccc
                 
 ";
-var expected = @"
+        var expected = @"
     a
 bb
 
@@ -234,7 +235,7 @@ bb
     [TestMethod]
     public void To01()
     {
-        Assert.AreEqual("a","abc".To(0));
+        Assert.AreEqual("a", "abc".To(0));
         Assert.AreEqual("ab", "abc".To(1));
         Assert.AreEqual("abc", "abc".To(2));
 

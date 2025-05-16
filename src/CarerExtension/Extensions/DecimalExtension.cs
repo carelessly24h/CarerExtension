@@ -1,7 +1,20 @@
 ﻿namespace CarerExtension.Extensions;
 
+/// <summary>
+/// Decimal extension methods.
+/// </summary>
 public static class DecimalExtension
 {
+    /// <summary>
+    /// レシーバの数値が指定した数値の倍数かどうかを判定します。
+    /// </summary>
+    /// <remarks>active support like.</remarks>
+    /// <param name="source">基準となる数値。</param>
+    /// <param name="value">数値。</param>
+    /// <returns>
+    /// レシーバの数値が指定した数値の倍数の場合は<see langword="true"/>。
+    /// そうでない場合は<see langword="false"/>。
+    /// </returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool MultipleOf(this decimal source, int value)
     {
@@ -15,6 +28,16 @@ public static class DecimalExtension
         }
     }
 
+    /// <summary>
+    /// レシーバの数値が指定した数値の倍数かどうかを判定します。
+    /// </summary>
+    /// <remarks>active support like.</remarks>
+    /// <param name="source">基準となる数値。</param>
+    /// <param name="value">数値。</param>
+    /// <returns>
+    /// レシーバの数値が指定した数値の倍数の場合は<see langword="true"/>。
+    /// そうでない場合は<see langword="false"/>。
+    /// </returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool MultipleOf(this decimal source, long value)
     {
@@ -28,6 +51,16 @@ public static class DecimalExtension
         }
     }
 
+    /// <summary>
+    /// レシーバの数値が指定した数値の倍数かどうかを判定します。
+    /// </summary>
+    /// <remarks>active support like.</remarks>
+    /// <param name="source">基準となる数値。</param>
+    /// <param name="value">数値。</param>
+    /// <returns>
+    /// レシーバの数値が指定した数値の倍数の場合は<see langword="true"/>。
+    /// そうでない場合は<see langword="false"/>。
+    /// </returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool MultipleOf(this decimal source, double value)
     {
@@ -41,6 +74,16 @@ public static class DecimalExtension
         }
     }
 
+    /// <summary>
+    /// レシーバの数値が指定した数値の倍数かどうかを判定します。
+    /// </summary>
+    /// <remarks>active support like.</remarks>
+    /// <param name="source">基準となる数値。</param>
+    /// <param name="value">数値。</param>
+    /// <returns>
+    /// レシーバの数値が指定した数値の倍数の場合は<see langword="true"/>。
+    /// そうでない場合は<see langword="false"/>。
+    /// </returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool MultipleOf(this decimal source, decimal value)
     {

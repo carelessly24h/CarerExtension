@@ -176,6 +176,33 @@ public class IEnumerableExtensionTest
     }
 
     [TestMethod]
+    public void CrossJoin01()
+    {
+        {
+            int[] arr = [1, 2];
+            var results = arr.CrossJoin([3, 4]);
+
+            Assert.AreEqual(4, results.Count());
+            Assert.AreEqual((1, 3), results.ElementAt(0));
+            Assert.AreEqual((2, 4), results.ElementAt(3));
+        }
+        {
+            // empty + not empty.
+            int[] arr = [];
+            var results = arr.CrossJoin([3, 4]);
+
+            Assert.AreEqual(0, results.Count());
+        }
+        {
+            // not empty + empty.
+            int[] arr = [1, 2];
+            var results = arr.CrossJoin(Array.Empty<int>());
+
+            Assert.AreEqual(0, results.Count());
+        }
+    }
+
+    [TestMethod]
     public void Cycle01()
     {
         int[] arr = [1, 2, 3];
@@ -186,6 +213,41 @@ public class IEnumerableExtensionTest
         Assert.AreEqual(3, results.ElementAt(8));
     }
 
+    #region EachCons
+    [TestMethod]
+    public void EachCons01()
+    {
+        int[] arr = [1, 2, 3, 4, 5, 6];
+        var results = arr.EachCons(3);
+
+        Assert.AreEqual(4, results.Count());
+        {
+            var result = results.ElementAt(0);
+            Assert.AreEqual(3, result.Count());
+
+            Assert.AreEqual(1, result.ElementAt(0));
+            Assert.AreEqual(3, result.ElementAt(2));
+        }
+        {
+            var result = results.ElementAt(3);
+            Assert.AreEqual(3, result.Count());
+
+            Assert.AreEqual(4, result.ElementAt(0));
+            Assert.AreEqual(6, result.ElementAt(2));
+        }
+    }
+
+    [TestMethod]
+    public void EachCons02()
+    {
+        int[] arr = [1, 2];
+        var results = arr.EachCons(3);
+
+        Assert.AreEqual(0, results.Count());
+    }
+    #endregion
+
+    #region Excluding
     [TestMethod]
     public void Excluding01()
     {
@@ -204,6 +266,18 @@ public class IEnumerableExtensionTest
             Assert.AreEqual(0, results.Count());
         }
     }
+
+    [TestMethod]
+    public void Excluding02()
+    {
+        int?[] arr = [1, null, 3];
+        var results = arr.Excluding([null]);
+
+        Assert.AreEqual(2, results.Count());
+        Assert.AreEqual(1, results.ElementAt(0));
+        Assert.AreEqual(3, results.ElementAt(1));
+    }
+    #endregion
 
     [TestMethod]
     public void Including01()
@@ -226,27 +300,6 @@ public class IEnumerableExtensionTest
         {
             int[] arr = [1];
             Assert.IsFalse(arr.Many());
-        }
-    }
-
-    [TestMethod]
-    public void MultiFirst01()
-    {
-        {
-            int[] arr = [1, 2, 10, 3, 10, 10, 4, 5, 6];
-            var results = arr.MultiFirst(a => a < 10);
-
-            Assert.AreEqual(3, results.Count());
-            Assert.AreEqual(1, results.ElementAt(0));
-            Assert.AreEqual(4, results.ElementAt(2));
-        }
-        {
-            int[] arr = [10, 1, 2, 10, 3, 10, 10, 4, 5, 6, 10];
-            var results = arr.MultiFirst(a => a < 10);
-
-            Assert.AreEqual(3, results.Count());
-            Assert.AreEqual(1, results.ElementAt(0));
-            Assert.AreEqual(4, results.ElementAt(2));
         }
     }
 
@@ -283,33 +336,6 @@ public class IEnumerableExtensionTest
     #endregion
 
     [TestMethod]
-    public void Permutate01()
-    {
-        {
-            int[] arr = [1, 2];
-            var results = arr.Permutate([3, 4]);
-
-            Assert.AreEqual(4, results.Count());
-            Assert.AreEqual((1, 3), results.ElementAt(0));
-            Assert.AreEqual((2, 4), results.ElementAt(3));
-        }
-        {
-            // empty + not empty.
-            int[] arr = [];
-            var results = arr.Permutate([3, 4]);
-
-            Assert.AreEqual(0, results.Count());
-        }
-        {
-            // not empty + empty.
-            int[] arr = [1, 2];
-            var results = arr.Permutate(Array.Empty<int>());
-
-            Assert.AreEqual(0, results.Count());
-        }
-    }
-
-    [TestMethod]
     public void Reject01()
     {
         int[] arr = [1, 10, 2, 11];
@@ -321,26 +347,42 @@ public class IEnumerableExtensionTest
     }
 
     [TestMethod]
-
     public void Slice01()
     {
-        int[] arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-        var results = arr.Slice(1, 4);
+        int[] arr = [1, 2, 3, 4, 5];
+        var results = arr.Slice(0, 3);
 
-        Assert.AreEqual(4, results.Count());
-        Assert.AreEqual(2, results.ElementAt(0));
-        Assert.AreEqual(5, results.ElementAt(3));
+        Assert.AreEqual(3, results.Count());
+        Assert.AreEqual(1, results.ElementAt(0));
+        Assert.AreEqual(3, results.ElementAt(2));
     }
 
     [TestMethod]
+    public void Slice02()
+    {
+        int[] arr = [1];
+        var results = arr.Slice(1, 2);
 
+        Assert.AreEqual(0, results.Count());
+    }
+
+    [TestMethod]
     public void SliceByIndex01()
     {
-        int[] arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-        var results = arr.SliceByIndex(1, 3);
+        int[] arr = [1, 2, 3, 4, 5];
+        var results = arr.SliceByIndex(0, 3);
 
-        Assert.AreEqual(3, results.Count());
-        Assert.AreEqual(2, results.ElementAt(0));
-        Assert.AreEqual(4, results.ElementAt(2));
+        Assert.AreEqual(4, results.Count());
+        Assert.AreEqual(1, results.ElementAt(0));
+        Assert.AreEqual(4, results.ElementAt(3));
+    }
+
+    [TestMethod]
+    public void SliceByIndex02()
+    {
+        int[] arr = [1];
+        var results = arr.SliceByIndex(1, 2);
+
+        Assert.AreEqual(0, results.Count());
     }
 }
