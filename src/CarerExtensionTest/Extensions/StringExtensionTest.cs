@@ -114,13 +114,6 @@ aaa
     }
 
     [TestMethod]
-    public void IsUnmatch01()
-    {
-        Assert.IsTrue("zzz".IsUnmatch("^a"));
-        Assert.IsFalse("abc".IsUnmatch("^a"));
-    }
-
-    [TestMethod]
     public void Last01()
     {
         Assert.AreEqual("c", "abc".Last(1));

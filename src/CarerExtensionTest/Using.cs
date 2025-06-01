@@ -1,6 +1,7 @@
 ﻿global using CarerExtension.Extensions;
 global using CarerExtension.IO.Csv;
 global using CarerExtension.IO.Excel;
+global using CarerExtension.IO.Excel.Attributes;
 global using CarerExtension.IO.Json;
 global using CarerExtension.IO.Xml;
 global using CarerExtension.IO.Yaml;

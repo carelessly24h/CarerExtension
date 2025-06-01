@@ -23,6 +23,7 @@ internal class TestExcelFile : ExcelIO, IDisposable
     {
         Sheets.Add(new TestExcelSheet1(workbook));
         Sheets.Add(new TestExcelSheet2(workbook));
+        Sheets.Add(new TestExcelSheet3(workbook));
     }
 
     public static new TestExcelFile Read(string path) => new(path);

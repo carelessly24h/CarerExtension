@@ -15,72 +15,116 @@ public class ExcelTest
     [TestMethod]
     public void Read01()
     {
+        #region pre-process
         using var excel = TestExcelFile.Read(TEST_FILE);
         var tester = new PrivateMemberTester(excel);
+        #endregion
 
         var sheets = tester.Invoke<IEnumerable<ExcelSheetIO>>("Sheets");
-        Assert.AreEqual(2, sheets.Count());
+        Assert.AreEqual(3, sheets.Count());
 
         // sheet1 testing.
-        {
-            var sheet = (TestExcelSheet1)sheets.ElementAt(0);
-            Assert.AreEqual(new(2024, 6, 10), sheet.CreateAt);
-            Assert.AreEqual("TestUser1", sheet.Creator);
-
-            {
-                var item = sheet.Items.ElementAt(0);
-                Assert.AreEqual(1, item.No);
-                Assert.AreEqual("Item1", item.Name);
-                Assert.AreEqual(5, item.Quantity);
-                Assert.AreEqual(new(2024, 1, 1), item.At);
-                Assert.IsTrue(item.Enable);
-            }
-            {
-                var item = sheet.Items.ElementAt(4);
-                Assert.AreEqual(5, item.No);
-                Assert.AreEqual("Item5", item.Name);
-                Assert.AreEqual(9, item.Quantity);
-                Assert.AreEqual(new(2024, 5, 1), item.At);
-                Assert.IsTrue(item.Enable);
-            }
-        }
+        var sheet = (TestExcelSheet1)sheets.ElementAt(0);
+        Assert.AreEqual(new(2024, 1, 1), sheet.CreateAt);
+        Assert.AreEqual("TestUser11", sheet.Creator);
     }
 
     [TestMethod]
     public void Read02()
     {
+        #region pre-process
         using var excel = TestExcelFile.Read(TEST_FILE);
         var tester = new PrivateMemberTester(excel);
+        #endregion
 
         var sheets = tester.Invoke<IEnumerable<ExcelSheetIO>>("Sheets");
-        Assert.AreEqual(2, sheets.Count());
+        Assert.AreEqual(3, sheets.Count());
 
         // sheet2 testing.
+        var sheet = (TestExcelSheet2)sheets.ElementAt(1);
+        Assert.AreEqual(new(2024, 2, 2), sheet.Area.CreateAt);
+        Assert.AreEqual("TestUser21", sheet.Area.Creator);
+
         {
-            var sheet = (TestExcelSheet2)sheets.ElementAt(1);
-            Assert.AreEqual(new(2024, 6, 10), sheet.CreateAt);
-            Assert.AreEqual("TestUser2", sheet.Creator);
+            var item = sheet.Items.ElementAt(0);
+            Assert.AreEqual(21, item.No);
+            Assert.AreEqual("Item21", item.Name);
+            Assert.AreEqual(201, item.Quantity);
+            Assert.AreEqual(20.1, item.Average);
+            Assert.AreEqual(new(2024, 2, 11), item.At);
+            Assert.AreEqual(true, item.Enable);
+        }
+        {
+            var item = sheet.Items.ElementAt(2);
+            Assert.AreEqual(23, item.No);
+            Assert.AreEqual("Item23", item.Name);
+            Assert.AreEqual(203, item.Quantity);
+            Assert.AreEqual(20.3, item.Average);
+            Assert.AreEqual(new(2024, 2, 13), item.At);
+            Assert.AreEqual(true, item.Enable);
+        }
+    }
+
+    [TestMethod]
+    public void Read03()
+    {
+        #region pre-process
+        using var excel = TestExcelFile.Read(TEST_FILE);
+        var tester = new PrivateMemberTester(excel);
+        #endregion
+
+        var sheets = tester.Invoke<IEnumerable<ExcelSheetIO>>("Sheets");
+        Assert.AreEqual(3, sheets.Count());
+
+        // sheet3 testing.
+        var sheet = (TestExcelSheet3)sheets.ElementAt(2);
+        {
+            var area = sheet.Area1;
+            Assert.AreEqual(new(2024, 3, 3), area.CreateAt);
+            Assert.AreEqual("TestUser31", area.Creator);
 
             {
-                var point = sheet.MeasurePoints.ElementAt(0);
-                Assert.AreEqual("Point1", point.Name);
-                Assert.AreEqual(1000, point.ValueA);
-                Assert.AreEqual(1001, point.ValueB);
-                Assert.AreEqual(1000.5, point.Average);
+                var item = area.Items.ElementAt(0);
+                Assert.AreEqual(31, item.No);
+                Assert.AreEqual("Item31", item.Name);
+                Assert.AreEqual(301, item.Quantity);
+                Assert.AreEqual(3001D, item.Average);
+                Assert.AreEqual(new(2024, 3, 11), item.At);
+                Assert.AreEqual(true, item.Enable);
             }
             {
-                var point = sheet.MeasurePoints.ElementAt(2);
-                Assert.AreEqual("Point3", point.Name);
-                Assert.AreEqual(4000, point.ValueA);
-                Assert.AreEqual(4001, point.ValueB);
-                Assert.AreEqual(4000.5, point.Average);
+                var item = area.Items.ElementAt(2);
+                Assert.AreEqual(33, item.No);
+                Assert.AreEqual("Item33", item.Name);
+                Assert.AreEqual(303, item.Quantity);
+                Assert.AreEqual(3003D, item.Average);
+                Assert.AreEqual(new(2024, 3, 13), item.At);
+                Assert.AreEqual(true, item.Enable);
             }
+        }
+        {
+            var area = sheet.Area2;
+            Assert.AreEqual(new(2024, 3, 4), area.CreateAt);
+            Assert.AreEqual("TestUser32", area.Creator);
 
-            Assert.AreEqual("P03", sheet.PointId);
-            Assert.AreEqual("Point3", sheet.PointName);
-            Assert.AreEqual("Tower No.3 A Room", sheet.PointAddress);
-            Assert.AreEqual(1005.1, sheet.MinValue);
-            Assert.AreEqual(1050.5, sheet.MaxValue);
+            {
+                var item = area.Items.ElementAt(0);
+                Assert.AreEqual(34, item.No);
+                Assert.AreEqual("Item34", item.Name);
+                Assert.AreEqual(304, item.Quantity);
+                Assert.AreEqual(30.4, item.Average);
+                Assert.AreEqual(new(2024, 3, 14), item.At);
+                Assert.AreEqual(false, item.Enable);
+            }
+            {
+                var item = area.Items.ElementAt(2);
+                Assert.AreEqual(36, item.No);
+                Assert.AreEqual("Item36", item.Name);
+                Assert.AreEqual(306, item.Quantity);
+                Assert.AreEqual(30.6, item.Average);
+                Assert.AreEqual(new(2024, 3, 16), item.At);
+                Assert.AreEqual(false, item.Enable);
+            }
         }
     }
 
@@ -104,7 +148,7 @@ public class ExcelTest
     public void Write01()
     {
         var dir = $@"{ROOT_DIR}\write1";
-        var writeFile = $@"{dir}\write.csv";
+        var writeFile = $@"{dir}\write.xlsx";
 
         #region pre-process
         Directory.CreateDirectory(dir);

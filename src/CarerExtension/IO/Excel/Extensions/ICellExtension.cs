@@ -1,9 +1,17 @@
 ﻿using NPOI.SS.UserModel;
 
-namespace CarerExtension.IO.Excel;
+namespace CarerExtension.IO.Excel.Extensions;
 
+/// <summary>
+/// ICellの拡張メソッド
+/// </summary>
 public static class ICellExtension
 {
+    /// <summary>
+    /// セルの値を設定する
+    /// </summary>
+    /// <param name="cell">設定先のセル</param>
+    /// <param name="value">設定する値</param>
     public static void SetCellValue(this ICell cell, object? value)
     {
         if (value != null)
