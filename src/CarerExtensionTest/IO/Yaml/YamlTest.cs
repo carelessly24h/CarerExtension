@@ -19,7 +19,7 @@ public class YamlTest
 
         #region pre-process
         Directory.CreateDirectory(dir);
-        File.WriteAllText(readFile, YamlContent01());
+        File.WriteAllText(readFile, YAML_CONTENT);
         #endregion
 
         var yaml = TestYamlFile.Read(readFile);
@@ -60,7 +60,7 @@ public class YamlTest
         Assert.IsTrue(File.Exists(writeFile));
     }
 
-    private static string YamlContent01() => @"
+    private const string YAML_CONTENT = @"
 intItem: 1
 doubleItem: 1.5
 stringItem: string1

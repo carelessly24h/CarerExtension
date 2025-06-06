@@ -13,3 +13,12 @@ If this project violates your rights then I will deal with it immediately.
 
 - VS2022
 - .NET 8.0
+
+## Using packages
+
+Thank you very much.
+
+- CsvHelper
+- NPOI
+- PDFsharp
+- YamlDotNet

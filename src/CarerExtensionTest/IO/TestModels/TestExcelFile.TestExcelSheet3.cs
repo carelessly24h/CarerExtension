@@ -21,6 +21,7 @@ internal class TestExcelSheet3(IWorkbook workbook) : ExcelSheetIO(workbook)
     public override void Write()
     {
         CreateSheet("test_sheet3");
+        SelectSheet("test_sheet3");
         SetValues();
         WriteCells();
     }
@@ -30,24 +31,24 @@ internal class TestExcelSheet3(IWorkbook workbook) : ExcelSheetIO(workbook)
         Area1 = new()
         {
             CreateAt = new(2024, 1, 1),
-            Creator = "TestUser1",
+            Creator = "TestUser",
 
             Items = [
-                new(10, "Item11", 101, 10.1, new(2024, 2, 1), true),
-                new(20, "Item12", 102, 10.2, new(2024, 2, 2), false),
-                new(30, "Item13", 103, 10.3, new(2024, 2, 3), true),
+                new(10, "Item11", 101, 10.1, new(2024, 1, 2), true),
+                new(20, "Item12", 102, 10.2, new(2024, 1, 3), false),
+                new(30, "Item13", 103, 10.3, new(2024, 1, 4), true),
             ]
         };
 
         Area2 = new()
         {
-            CreateAt = new(2024, 10, 1),
-            Creator = "TestUser",
+            CreateAt = new(2024, 2, 1),
+            Creator = "TestUser2",
 
             Items = [
-                new(11, "Item21", 111, 11.1, new(2024, 11, 1), false),
-                new(21, "Item22", 112, 11.2, new(2024, 11, 2), true),
-                new(31, "Item23", 113, 11.3, new(2024, 11, 3), false),
+                new(11, "Item21", 111, 11.1, new(2024, 2, 2), false),
+                new(21, "Item22", 112, 11.2, new(2024, 2, 3), true),
+                new(31, "Item23", 113, 11.3, new(2024, 2, 4), false),
             ]
         };
     }

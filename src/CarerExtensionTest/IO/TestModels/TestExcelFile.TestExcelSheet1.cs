@@ -21,13 +21,14 @@ internal class TestExcelSheet1(IWorkbook workbook) : ExcelSheetIO(workbook)
     public override void Write()
     {
         CreateSheet("test_sheet1");
+        SelectSheet("test_sheet1");
         SetValues();
         WriteCells();
     }
 
     private void SetValues()
     {
-        CreateAt = new(2024, 6, 1);
+        CreateAt = new(2024, 1, 1);
         Creator = "TestUser";
     }
 }

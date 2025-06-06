@@ -36,8 +36,6 @@ internal class TestExcelFile : ExcelIO, IDisposable
         }
     }
 
-    public void Update(string path) => base.Write(path);
-
     public override void Write(string path)
     {
         WriteSheets();

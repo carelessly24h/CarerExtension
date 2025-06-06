@@ -478,26 +478,55 @@ public class PathnameTest
     }
 
     [TestMethod]
+    public void Read01()
+    {
+        var dir = $@"{ROOT_DIR}\read1";
+        var txtFile = $@"{dir}\test1.txt";
+        var binFile = $@"{dir}\test1.bin";
+
+        #region pre-process
+        Directory.CreateDirectory(dir);
+        File.WriteAllText(txtFile, "aaa\nbbb");
+        File.WriteAllBytes(binFile, [1, 2, 3]);
+        #endregion
+
+        {
+            var file = new Pathname(txtFile);
+            var content = file.ReadAllText();
+            Assert.AreEqual("aaa\nbbb", content);
+        }
+        {
+            var file = new Pathname(binFile);
+            var content = file.ReadAllBytes();
+            Assert.AreEqual(3, content.Count());
+            Assert.AreEqual(1, content.ElementAt(0));
+            Assert.AreEqual(3, content.ElementAt(2));
+        }
+    }
+
+    [TestMethod]
     public void Write01()
     {
         var dir = $@"{ROOT_DIR}\write1";
+        var txtFile = $@"{dir}\test1.txt";
+        var binFile = $@"{dir}\test1.bin";
 
         #region pre-process
         Directory.CreateDirectory(dir);
         #endregion
 
         {
-            var file = new Pathname(dir, "test1.txt");
+            var file = new Pathname(txtFile);
             file.Write("test");
             Assert.IsTrue(File.Exists(file.ToString()));
         }
         {
-            var file = new Pathname(dir, "test1.bin");
+            var file = new Pathname(binFile);
             file.Write((IEnumerable<byte>)[1, 2]);
             Assert.IsTrue(File.Exists(file.ToString()));
         }
         {
-            var file = new Pathname(dir, "test2.bin");
+            var file = new Pathname(binFile);
             file.Write([1, 2]);
             Assert.IsTrue(File.Exists(file.ToString()));
         }

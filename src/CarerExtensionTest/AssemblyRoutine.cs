@@ -1,7 +1,7 @@
 ﻿namespace CarerExtensionTest;
 
 [TestClass]
-public class AssemblyRoutine
+public static class AssemblyRoutine
 {
     [AssemblyInitialize]
     public static void Initialize(TestContext _)

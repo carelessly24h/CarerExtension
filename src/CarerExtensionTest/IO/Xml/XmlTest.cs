@@ -19,7 +19,7 @@ public class XmlTest
 
         #region pre-process
         Directory.CreateDirectory(dir);
-        File.WriteAllText(readFile, XmlContent01());
+        File.WriteAllText(readFile, XML_CONTENT);
         #endregion
 
         var xml = TestXmlFile.Read(readFile);
@@ -60,7 +60,7 @@ public class XmlTest
         Assert.IsTrue(File.Exists(writeFile));
     }
 
-    private static string XmlContent01() => @"<?xml version=""1.0"" encoding=""utf-8""?>
+    private const string XML_CONTENT = @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RootNode xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
   <int-Node>1</int-Node>
   <double-Node>1.5</double-Node>

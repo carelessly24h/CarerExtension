@@ -267,12 +267,12 @@ public class DateTimeExtensionTest
     {
         {
             var d = new DateTime(2001, 2, 1);
-            Assert.AreEqual(d.DaysInMonth(), 28);
+            Assert.AreEqual(28, d.DaysInMonth());
         }
         {
             // leap year.
             var d = new DateTime(2004, 2, 1);
-            Assert.AreEqual(d.DaysInMonth(), 29);
+            Assert.AreEqual(29, d.DaysInMonth());
         }
     }
 

@@ -19,7 +19,7 @@ public class JsonTest
 
         #region pre-process
         Directory.CreateDirectory(dir);
-        File.WriteAllText(readFile, JsonContent01());
+        File.WriteAllText(readFile, JSON_CONTENT);
         #endregion
 
         var json = TestJsonFile.Read(readFile);
@@ -60,7 +60,7 @@ public class JsonTest
         Assert.IsTrue(File.Exists(writeFile));
     }
 
-    private static string JsonContent01() => @"
+    private const string JSON_CONTENT = @"
 {
   ""intItem"": 1,
   ""doubleItem"": 1.5,

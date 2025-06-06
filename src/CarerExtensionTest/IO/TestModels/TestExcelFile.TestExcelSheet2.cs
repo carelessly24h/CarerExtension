@@ -24,6 +24,7 @@ internal class TestExcelSheet2(IWorkbook workbook) : ExcelSheetIO(workbook)
     public override void Write()
     {
         CreateSheet("test_sheet2");
+        SelectSheet("test_sheet2");
         SetValues();
         WriteCells();
     }
@@ -34,9 +35,9 @@ internal class TestExcelSheet2(IWorkbook workbook) : ExcelSheetIO(workbook)
         Area.Creator = "TestUser";
 
         Items = [
-            new(10, "Item1", 101, 10.1, new(2024, 2, 1), true),
-            new(20, "Item2", 102, 10.2, new(2024, 2, 2), false),
-            new(30, "Item3", 103, 10.3, new(2024, 2, 3), true),
+            new(10, "Item1", 101, 10.1, new(2024, 1, 2), true),
+            new(20, "Item2", 102, 10.2, new(2024, 1, 3), false),
+            new(30, "Item3", 103, 10.3, new(2024, 1, 4), true),
         ];
     }
 

@@ -39,7 +39,7 @@ public abstract class ExcelIO : IDisposable
     /// <summary>
     /// 解放処理
     /// </summary>
-    public void Dispose()
+    public virtual void Dispose()
     {
         try
         {

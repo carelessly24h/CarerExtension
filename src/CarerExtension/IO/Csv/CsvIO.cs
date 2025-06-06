@@ -55,7 +55,7 @@ public abstract class CsvIO<T>(string path, Encoding encoding) : IDisposable whe
     /// <summary>
     /// 解放処理
     /// </summary>
-    public void Dispose()
+    public virtual void Dispose()
     {
         try
         {

@@ -19,7 +19,7 @@ public class CsvTest
 
         #region pre-process
         Directory.CreateDirectory(dir);
-        File.WriteAllText(readFile, CsvContent01());
+        File.WriteAllText(readFile, CSV_CONTENT);
         #endregion
 
         using var csv = TestCsvFile.Read(readFile);
@@ -72,7 +72,7 @@ public class CsvTest
 
         #region pre-process
         Directory.CreateDirectory(dir);
-        File.WriteAllText(readFile, CsvContent01());
+        File.WriteAllText(readFile, CSV_CONTENT);
         #endregion
 
         using var csv = TestCsvFile.Read(readFile);
@@ -83,7 +83,7 @@ public class CsvTest
         Assert.IsTrue(File.Exists(writeFile));
     }
 
-    private static string CsvContent01() => @"intItem,doubleItem,stringItem,dateItem,boolItem
+    private const string CSV_CONTENT = @"intItem,doubleItem,stringItem,dateItem,boolItem
 1,1.5,string1,20010101000000,t
 ,2.5,string2,20020202000000,f
 3,,string3,20030303000000,t

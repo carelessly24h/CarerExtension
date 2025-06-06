@@ -3,7 +3,6 @@ using CarerExtension.IO.Excel.Attributes;
 using CarerExtension.IO.Excel.Extensions;
 using NPOI.SS.UserModel;
 using NPOI.SS.Util;
-using System.Collections.Generic;
 
 namespace CarerExtension.IO.Excel;
 
@@ -333,7 +332,7 @@ public abstract class ExcelSheetIO(IWorkbook workbook)
     /// <param name="sheetName">シート名。</param>
     public virtual void CreateSheet(string sheetName)
     {
-        worksheet = workbook.CreateSheet(sheetName);
+        workbook.CreateSheet(sheetName);
     }
 
     /// <summary>
@@ -385,18 +384,6 @@ public abstract class ExcelSheetIO(IWorkbook workbook)
     /// <param name="destinationIndex">コピー先の行インデックス。</param>
     public virtual void CopyRow(int sourceIndex, int destinationIndex) =>
         SheetUtil.CopyRow(Worksheet, sourceIndex, destinationIndex);
-
-    /// <summary>
-    /// 行インデックスと列インデックスを指定して、セルを取得します。
-    /// </summary>
-    /// <param name="rowIndex">取得するセルの行インデックス。</param>
-    /// <param name="columnIndex">取得するセルの列インデックス。</param>
-    /// <returns>インデックスに対応するセル。</returns>
-    private ICell GetCell(int rowIndex, int columnIndex)
-    {
-        var row = CellUtil.GetRow(rowIndex, Worksheet);
-        return CellUtil.GetCell(row, columnIndex);
-    }
     #endregion
 
     #region cell-reading
@@ -427,7 +414,7 @@ public abstract class ExcelSheetIO(IWorkbook workbook)
     /// <param name="columnIndex">値を取得するセルの列インデックス。</param>
     /// <returns>指定されたセルの値。</returns>
     protected virtual bool? GetBooleanValue(int rowIndex, int columnIndex) =>
-        GetCellValue<bool?>(GetCell(rowIndex, columnIndex));
+        GetCellValue<bool?>(Worksheet.GetCell(rowIndex, columnIndex));
 
     /// <summary>
     /// 指定されたセルの値を取得します。
@@ -449,7 +436,7 @@ public abstract class ExcelSheetIO(IWorkbook workbook)
     /// <param name="columnIndex">値を取得するセルの列インデックス。</param>
     /// <returns>指定されたセルの値。</returns>
     protected virtual double? GetDoubleValue(int rowIndex, int columnIndex) =>
-        GetCellValue<double?>(GetCell(rowIndex, columnIndex));
+        GetCellValue<double?>(Worksheet.GetCell(rowIndex, columnIndex));
 
     /// <summary>
     /// 指定されたセルの値を取得します。
@@ -458,7 +445,7 @@ public abstract class ExcelSheetIO(IWorkbook workbook)
     /// <param name="columnIndex">値を取得するセルの列インデックス。</param>
     /// <returns>指定されたセルの値。</returns>
     protected virtual int? GetInt32Value(int rowIndex, int columnIndex) =>
-        (int?)GetCellValue<double?>(GetCell(rowIndex, columnIndex));
+        (int?)GetCellValue<double?>(Worksheet.GetCell(rowIndex, columnIndex));
 
     /// <summary>
     /// 指定されたセルの値を取得します。
@@ -467,7 +454,7 @@ public abstract class ExcelSheetIO(IWorkbook workbook)
     /// <param name="columnIndex">値を取得するセルの列インデックス。</param>
     /// <returns>指定されたセルの値。</returns>
     protected virtual long? GetInt64Value(int rowIndex, int columnIndex) =>
-        (long?)GetCellValue<double?>(GetCell(rowIndex, columnIndex));
+        (long?)GetCellValue<double?>(Worksheet.GetCell(rowIndex, columnIndex));
 
     /// <summary>
     /// 指定されたセルの値を取得します。
@@ -476,7 +463,7 @@ public abstract class ExcelSheetIO(IWorkbook workbook)
     /// <param name="columnIndex">値を取得するセルの列インデックス。</param>
     /// <returns>指定されたセルの値。</returns>
     protected virtual string? GetStringValue(int rowIndex, int columnIndex) =>
-        GetCellValue<string?>(GetCell(rowIndex, columnIndex));
+        GetCellValue<string?>(Worksheet.GetCell(rowIndex, columnIndex));
 
     /// <summary>
     /// セルの値を取得します。
@@ -537,7 +524,7 @@ public abstract class ExcelSheetIO(IWorkbook workbook)
     /// <param name="cell">設定する値のパラメータ。</param>
     protected virtual void EditCell(ExcelCell cell)
     {
-        var c = GetCell(cell.RowIndex, cell.ColumnIndex);
+        var c = Worksheet.GetCell(cell.RowIndex, cell.ColumnIndex);
         EditCell(c, cell.Value, cell.DataFormat);
     }
 
@@ -550,7 +537,7 @@ public abstract class ExcelSheetIO(IWorkbook workbook)
     /// <param name="dataFormat">セルに設定するデータ形式。</param>
     protected virtual void EditCell(int rowIndex, int columnIndex, object? value, string? dataFormat = null)
     {
-        var c = GetCell(rowIndex, columnIndex);
+        var c = Worksheet.GetCell(rowIndex, columnIndex);
         EditCell(c, value, dataFormat);
     }
 

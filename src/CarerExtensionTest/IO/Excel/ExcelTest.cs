@@ -52,7 +52,7 @@ public class ExcelTest
             Assert.AreEqual(201, item.Quantity);
             Assert.AreEqual(20.1, item.Average);
             Assert.AreEqual(new(2024, 2, 11), item.At);
-            Assert.AreEqual(true, item.Enable);
+            Assert.IsTrue(item.Enable);
         }
         {
             var item = sheet.Items.ElementAt(2);
@@ -61,7 +61,7 @@ public class ExcelTest
             Assert.AreEqual(203, item.Quantity);
             Assert.AreEqual(20.3, item.Average);
             Assert.AreEqual(new(2024, 2, 13), item.At);
-            Assert.AreEqual(true, item.Enable);
+            Assert.IsTrue(item.Enable);
         }
     }
 
@@ -90,7 +90,7 @@ public class ExcelTest
                 Assert.AreEqual(301, item.Quantity);
                 Assert.AreEqual(3001D, item.Average);
                 Assert.AreEqual(new(2024, 3, 11), item.At);
-                Assert.AreEqual(true, item.Enable);
+                Assert.IsTrue(item.Enable);
             }
             {
                 var item = area.Items.ElementAt(2);
@@ -99,7 +99,7 @@ public class ExcelTest
                 Assert.AreEqual(303, item.Quantity);
                 Assert.AreEqual(3003D, item.Average);
                 Assert.AreEqual(new(2024, 3, 13), item.At);
-                Assert.AreEqual(true, item.Enable);
+                Assert.IsTrue(item.Enable);
             }
         }
         {
@@ -114,7 +114,7 @@ public class ExcelTest
                 Assert.AreEqual(304, item.Quantity);
                 Assert.AreEqual(30.4, item.Average);
                 Assert.AreEqual(new(2024, 3, 14), item.At);
-                Assert.AreEqual(false, item.Enable);
+                Assert.IsFalse(item.Enable);
             }
             {
                 var item = area.Items.ElementAt(2);
@@ -123,25 +123,9 @@ public class ExcelTest
                 Assert.AreEqual(306, item.Quantity);
                 Assert.AreEqual(30.6, item.Average);
                 Assert.AreEqual(new(2024, 3, 16), item.At);
-                Assert.AreEqual(false, item.Enable);
+                Assert.IsFalse(item.Enable);
             }
         }
-    }
-
-    [TestMethod]
-    public void Update01()
-    {
-        var dir = $@"{ROOT_DIR}\update1";
-        var writeFile = $@"{dir}\update.csv";
-
-        #region pre-process
-        Directory.CreateDirectory(dir);
-        #endregion
-
-        using var excel = TestExcelFile.Read(TEST_FILE);
-        excel.Update(writeFile);
-
-        Assert.IsTrue(File.Exists(writeFile));
     }
 
     [TestMethod]
@@ -157,6 +141,95 @@ public class ExcelTest
         using var excel = new TestExcelFile();
         excel.Write(writeFile);
 
-        Assert.IsTrue(File.Exists(writeFile));
+        // sheet1 testing.
+        using var book = ExcelTestUtil.OpenWorkbook(writeFile);
+        var sheet = book.GetSheet("test_sheet1");
+
+        Assert.AreEqual(new DateTime(2024, 1, 1), sheet.GetCell(2, 5).DateCellValue);
+        Assert.AreEqual("TestUser", sheet.GetCell(3, 5).StringCellValue);
+    }
+
+    [TestMethod]
+    public void Write02()
+    {
+        var dir = $@"{ROOT_DIR}\write2";
+        var writeFile = $@"{dir}\write.xlsx";
+
+        #region pre-process
+        Directory.CreateDirectory(dir);
+        #endregion
+
+        using var excel = new TestExcelFile();
+        excel.Write(writeFile);
+
+        // sheet2 testing.
+        using var book = ExcelTestUtil.OpenWorkbook(writeFile);
+        var sheet = book.GetSheet("test_sheet2");
+
+        Assert.AreEqual(new DateTime(2024, 1, 1), sheet.GetCell(2, 5).DateCellValue);
+        Assert.AreEqual("TestUser", sheet.GetCell(3, 5).StringCellValue);
+
+        {
+            var row = sheet.GetRow(6);
+            Assert.AreEqual(10, row.GetCell(0).NumericCellValue);
+            Assert.AreEqual("Item1", row.GetCell(1).StringCellValue);
+            Assert.AreEqual(101, row.GetCell(2).NumericCellValue);
+            Assert.AreEqual(10.1, row.GetCell(3).NumericCellValue);
+            Assert.AreEqual(new DateTime(2024, 1, 2), row.GetCell(4).DateCellValue);
+            Assert.IsTrue(row.GetCell(5).BooleanCellValue);
+        }
+        {
+            var row = sheet.GetRow(8);
+            Assert.AreEqual(30, row.GetCell(0).NumericCellValue);
+            Assert.AreEqual("Item3", row.GetCell(1).StringCellValue);
+            Assert.AreEqual(103, row.GetCell(2).NumericCellValue);
+            Assert.AreEqual(10.3, row.GetCell(3).NumericCellValue);
+            Assert.AreEqual(new DateTime(2024, 1, 4), row.GetCell(4).DateCellValue);
+            Assert.IsTrue(row.GetCell(5).BooleanCellValue);
+        }
+    }
+
+    [TestMethod]
+    public void Write03()
+    {
+        var dir = $@"{ROOT_DIR}\write3";
+        var writeFile = $@"{dir}\write.xlsx";
+
+        #region pre-process
+        Directory.CreateDirectory(dir);
+        #endregion
+
+        using var excel = new TestExcelFile();
+        excel.Write(writeFile);
+
+        // shee3 testing.
+        using var book = ExcelTestUtil.OpenWorkbook(writeFile);
+        var sheet = book.GetSheet("test_sheet3");
+
+        Assert.AreEqual(new(2024, 1, 1), sheet.GetCell(2, 5).DateCellValue);
+        Assert.AreEqual("TestUser", sheet.GetCell(3, 5).StringCellValue);
+
+        {
+            var row = sheet.GetRow(6);
+            Assert.AreEqual(10, row.GetCell(0).NumericCellValue);
+            Assert.AreEqual("Item11", row.GetCell(1).StringCellValue);
+            Assert.AreEqual(101, row.GetCell(2).NumericCellValue);
+            Assert.AreEqual(10.1, row.GetCell(3).NumericCellValue);
+            Assert.AreEqual(new(2024, 1, 2), row.GetCell(4).DateCellValue);
+            Assert.IsTrue(row.GetCell(5).BooleanCellValue);
+        }
+
+        Assert.AreEqual(new(2024, 2, 1), sheet.GetCell(10, 5).DateCellValue);
+        Assert.AreEqual("TestUser2", sheet.GetCell(11, 5).StringCellValue);
+
+        {
+            var row = sheet.GetRow(16);
+            Assert.AreEqual(31, row.GetCell(0).NumericCellValue);
+            Assert.AreEqual("Item23", row.GetCell(1).StringCellValue);
+            Assert.AreEqual(113, row.GetCell(2).NumericCellValue);
+            Assert.AreEqual(11.3, row.GetCell(3).NumericCellValue);
+            Assert.AreEqual(new(2024, 2, 4), row.GetCell(4).DateCellValue);
+            Assert.IsFalse(row.GetCell(5).BooleanCellValue);
+        }
     }
 }
