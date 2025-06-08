@@ -6,7 +6,7 @@
 /// <typeparam name="T">チャンクの要素の型。この型パラメータは共変です。</typeparam>
 public sealed class Chunking<T> : IChunking<T>
 {
-    #region properties
+    #region property
     /// <summary>
     /// チャンクを表すコレクションを取得します。
     /// </summary>
@@ -24,7 +24,7 @@ public sealed class Chunking<T> : IChunking<T>
     public int Length { get; }
     #endregion
 
-    #region constructors
+    #region constructor
     /// <summary>
     /// コレクションの一部のチャンクを表す新しいインスタンスを初期化します。
     /// </summary>
@@ -38,7 +38,7 @@ public sealed class Chunking<T> : IChunking<T>
     }
     #endregion
 
-    #region methods
+    #region method
     /// <summary>
     /// コレクションの一部のチャンクを表す新しいインスタンスを初期化します。
     /// </summary>

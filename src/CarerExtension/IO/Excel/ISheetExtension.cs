@@ -4,7 +4,7 @@ using NPOI.SS.Util;
 namespace CarerExtension.IO.Excel;
 
 /// <summary>
-/// ISheet の拡張メソッドを提供します。
+/// <see cref="ISheet"/>の拡張メソッドを提供します。
 /// </summary>
 public static class ISheetExtension
 {

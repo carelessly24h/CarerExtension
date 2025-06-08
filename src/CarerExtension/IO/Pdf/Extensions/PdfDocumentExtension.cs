@@ -3,7 +3,7 @@
 namespace CarerExtension.IO.Pdf.Extensions;
 
 /// <summary>
-/// PdfDocumentの拡張メソッドを提供するクラス
+/// <see cref="PdfDocument"/>の拡張メソッドを提供します。
 /// </summary>
 public static class PdfDocumentExtension
 {

@@ -8,7 +8,6 @@ public class MemoryArchiverTest
 
     private const string EmptyFolderPath1 = $@"{RootDir}\add_empty_folder1";
     private const string TextFilePath1 = $@"{RootDir}\add_text_file1.txt";
-    private const string TextFilePath2 = $@"{RootDir}\add_text_file2.txt";
 
     [ClassInitialize]
     public static void Initialize(TestContext _)
@@ -17,7 +16,6 @@ public class MemoryArchiverTest
 
         Directory.CreateDirectory(EmptyFolderPath1);
         File.WriteAllText(TextFilePath1, "Text File no.1");
-        File.WriteAllText(TextFilePath2, "Text File no.2");
     }
 
     [TestMethod]
@@ -77,11 +75,16 @@ public class MemoryArchiverTest
         using var archiver = new MemoryArchiver(TestFile);
         var oldComment = archiver.GetComment();
 
-        archiver.ChangeComment("changed_comment");
-        var newComment = archiver.GetComment();
+        archiver.ChangeComment("changed_comment1");
+        var newComment1 = archiver.GetComment();
 
-        Assert.AreNotEqual(oldComment, newComment);
-        Assert.AreEqual("changed_comment", newComment);
+        archiver.ChangeComment("changed_comment2");
+        var newComment2 = archiver.GetComment();
+
+        Assert.AreNotEqual(oldComment, newComment1);
+        Assert.AreNotEqual(oldComment, newComment2);
+        Assert.AreEqual("changed_comment1", newComment1);
+        Assert.AreEqual("changed_comment2", newComment2);
     }
 
     [TestMethod]
@@ -139,14 +142,32 @@ public class MemoryArchiverTest
         var files = MemoryArchiver.Decompress(TestFile);
         foreach (var file in files)
         {
-            if (file.IsDirectory)
-            {
-                Directory.CreateDirectory(@$"{dir}\{file.EntryPath}");
-            }
-            else
-            {
-                File.WriteAllBytes(@$"{dir}\{file.EntryPath}", file.ReadFromCache());
-            }
+            file.Write(dir);
+        }
+
+        #region validate
+        Assert.IsTrue(File.Exists($@"{dir}\text_file1.txt"));
+        Assert.IsTrue(File.Exists($@"{dir}\zip_folder\text_file2.txt"));
+        Assert.IsTrue(File.Exists($@"{dir}\zip_folder\text_file3"));
+        Assert.IsTrue(Directory.Exists($@"{dir}\empty_folder"));
+        #endregion
+    }
+
+    [TestMethod]
+    public void Decompress02()
+    {
+        var dir = $@"{RootDir}\decompress2";
+
+        #region pre-process
+        Directory.CreateDirectory(dir);
+        #endregion
+
+        using var a = new MemoryArchiver(TestFile);
+        var files = a.Decompress();
+
+        foreach (var file in files)
+        {
+            file.Write(dir);
         }
 
         #region validate

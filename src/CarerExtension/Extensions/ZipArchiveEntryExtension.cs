@@ -1,7 +1,7 @@
 ﻿namespace CarerExtension.Extensions;
 
 /// <summary>
-/// ZipArchiveEntryの拡張メソッドを提供します。
+/// <see cref="ZipArchiveEntry"/>の拡張メソッドを提供します。
 /// </summary>
 public static class ZipArchiveEntryExtension
 {

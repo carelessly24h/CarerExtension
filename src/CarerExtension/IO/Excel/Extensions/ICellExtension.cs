@@ -3,7 +3,7 @@
 namespace CarerExtension.IO.Excel.Extensions;
 
 /// <summary>
-/// ICellの拡張メソッド
+/// <see cref="ICell"/>の拡張メソッドを提供します。
 /// </summary>
 public static class ICellExtension
 {

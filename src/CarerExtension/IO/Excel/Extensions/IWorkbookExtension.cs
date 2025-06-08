@@ -3,7 +3,7 @@
 namespace CarerExtension.IO.Excel.Extensions;
 
 /// <summary>
-/// IWorkbookの拡張メソッド
+/// <see cref="IWorkbook"/>の拡張メソッドを提供します。
 /// </summary>
 public static class IWorkbookExtension
 {

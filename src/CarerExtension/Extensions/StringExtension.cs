@@ -3,7 +3,7 @@
 namespace CarerExtension.Extensions;
 
 /// <summary>
-/// Stringクラスの拡張メソッドを提供するクラスです。
+/// <see cref="string"/>の拡張メソッドを提供します。
 /// </summary>
 public static class StringExtension
 {

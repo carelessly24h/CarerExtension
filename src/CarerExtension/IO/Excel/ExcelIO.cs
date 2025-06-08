@@ -16,7 +16,7 @@ public abstract class ExcelIO : IDisposable
     protected readonly IWorkbook workbook;
     #endregion
 
-    #region constractor
+    #region constructor
     /// <summary>
     /// XLSXファイルを作成する
     /// </summary>
