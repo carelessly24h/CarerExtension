@@ -25,6 +25,7 @@
 		<Using Include="Microsoft.Playwright.MSTest" />
 		<Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
 		<Using Include="System.Diagnostics.CodeAnalysis" />
+		<Using Include="System.IO.Compression" />
 		<Using Include="System.Text.Json" />
 		<Using Include="System.Text.Json.Serialization" />
 		<Using Include="System.Text.RegularExpressions" />
@@ -36,16 +37,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Include="IO\TestModels\Assets\GenShinGothic-Medium.ttf" />
+		<EmbeddedResource Include="IO\TestModels\Assets\GenShinGothic-Medium.ttf" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Update="IO\TestFiles\TestPdfFile.pdf">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
-	  <None Update="IO\TestFiles\TestExcelFile.xlsx">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
+	<None Update="IO\TestFiles\TestExcelFile.xlsx">
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</None>
+	<None Update="IO\TestFiles\TestPdfFile.pdf">
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</None>
+	<None Update="IO\TestFiles\TestZipFile.zip">
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</None>
 	</ItemGroup>
 
 </Project>

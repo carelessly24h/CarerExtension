@@ -3,23 +3,23 @@
 [TestClass]
 public class JsonTest
 {
-    private const string ROOT_DIR = @"test\json_test";
+    private const string RootDir = @"test\json_test";
 
     [ClassInitialize]
     public static void Initialize(TestContext _)
     {
-        Directory.CreateDirectory(ROOT_DIR);
+        Directory.CreateDirectory(RootDir);
     }
 
     [TestMethod]
     public void Read01()
     {
-        var dir = $@"{ROOT_DIR}\read1";
+        var dir = $@"{RootDir}\read1";
         var readFile = $@"{dir}\read.json";
 
         #region pre-process
         Directory.CreateDirectory(dir);
-        File.WriteAllText(readFile, JSON_CONTENT);
+        File.WriteAllText(readFile, JsonContent);
         #endregion
 
         var json = TestJsonFile.Read(readFile);
@@ -36,7 +36,7 @@ public class JsonTest
     [TestMethod]
     public void Write01()
     {
-        var dir = $@"{ROOT_DIR}\write1";
+        var dir = $@"{RootDir}\write1";
         var writeFile = $@"{dir}\write.json";
 
         #region pre-process
@@ -60,7 +60,7 @@ public class JsonTest
         Assert.IsTrue(File.Exists(writeFile));
     }
 
-    private const string JSON_CONTENT = @"
+    private const string JsonContent = @"
 {
   ""intItem"": 1,
   ""doubleItem"": 1.5,

@@ -3,18 +3,18 @@
 [TestClass]
 public class TolerantCsvTest
 {
-    private const string ROOT_DIR = @"test\tolerant_csv_test";
+    private const string RootDir = @"test\tolerant_csv_test";
 
     [ClassInitialize]
     public static void Initialize(TestContext _)
     {
-        Directory.CreateDirectory(ROOT_DIR);
+        Directory.CreateDirectory(RootDir);
     }
 
     [TestMethod]
     public void Read01()
     {
-        var dir = $@"{ROOT_DIR}\read1";
+        var dir = $@"{RootDir}\read1";
         var readFile = $@"{dir}\read.csv";
 
         #region pre-process
@@ -46,7 +46,7 @@ public class TolerantCsvTest
     [TestMethod]
     public void Read02()
     {
-        var dir = $@"{ROOT_DIR}\read2";
+        var dir = $@"{RootDir}\read2";
         var readFile = $@"{dir}\read.csv";
 
         #region pre-process
@@ -61,7 +61,7 @@ public class TolerantCsvTest
     [TestMethod]
     public void Write01()
     {
-        var dir = $@"{ROOT_DIR}\write1";
+        var dir = $@"{RootDir}\write1";
         var writeFile = $@"{dir}\test.csv";
 
         #region pre-process
@@ -81,7 +81,7 @@ public class TolerantCsvTest
     [TestMethod]
     public void Write02()
     {
-        var dir = $@"{ROOT_DIR}\write2";
+        var dir = $@"{RootDir}\write2";
         var readFile = $@"{dir}\read.csv";
         var writeFile = $@"{dir}\test.csv";
 

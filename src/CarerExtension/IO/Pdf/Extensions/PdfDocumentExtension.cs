@@ -14,6 +14,7 @@ public static class PdfDocumentExtension
     /// <param name="document">ページを検索するPDFドキュメント。</param>
     /// <param name="pageNumber">ページ番号。</param>
     /// <returns>PDFドキュメントのページ</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static PdfPage GetPage(this PdfDocument document, int pageNumber)
     {
         if (pageNumber <= document.PageCount)

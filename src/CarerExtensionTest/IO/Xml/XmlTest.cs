@@ -3,23 +3,23 @@
 [TestClass]
 public class XmlTest
 {
-    private const string ROOT_DIR = @"test\xml_test";
+    private const string RootDir = @"test\xml_test";
 
     [ClassInitialize]
     public static void Initialize(TestContext _)
     {
-        Directory.CreateDirectory(ROOT_DIR);
+        Directory.CreateDirectory(RootDir);
     }
 
     [TestMethod]
     public void Read01()
     {
-        var dir = $@"{ROOT_DIR}\read1";
+        var dir = $@"{RootDir}\read1";
         var readFile = $@"{dir}\read.xml";
 
         #region pre-process
         Directory.CreateDirectory(dir);
-        File.WriteAllText(readFile, XML_CONTENT);
+        File.WriteAllText(readFile, XmlContent);
         #endregion
 
         var xml = TestXmlFile.Read(readFile);
@@ -34,7 +34,7 @@ public class XmlTest
     [TestMethod]
     public void Write01()
     {
-        var dir = $@"{ROOT_DIR}\write1";
+        var dir = $@"{RootDir}\write1";
         var writeFile = $@"{dir}\write.xml";
 
         #region pre-process
@@ -60,7 +60,7 @@ public class XmlTest
         Assert.IsTrue(File.Exists(writeFile));
     }
 
-    private const string XML_CONTENT = @"<?xml version=""1.0"" encoding=""utf-8""?>
+    private const string XmlContent = @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RootNode xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
   <int-Node>1</int-Node>
   <double-Node>1.5</double-Node>

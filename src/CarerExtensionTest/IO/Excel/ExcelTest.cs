@@ -3,20 +3,20 @@
 [TestClass]
 public class ExcelTest
 {
-    private const string TEST_FILE = @"IO\TestFiles\TestExcelFile.xlsx";
-    private const string ROOT_DIR = @"test\excel_test";
+    private const string TestFile = @"IO\TestFiles\TestExcelFile.xlsx";
+    private const string RootDir = @"test\excel_test";
 
     [ClassInitialize]
     public static void Initialize(TestContext _)
     {
-        Directory.CreateDirectory(ROOT_DIR);
+        Directory.CreateDirectory(RootDir);
     }
 
     [TestMethod]
     public void Read01()
     {
         #region pre-process
-        using var excel = TestExcelFile.Read(TEST_FILE);
+        using var excel = TestExcelFile.Read(TestFile);
         var tester = new PrivateMemberTester(excel);
         #endregion
 
@@ -33,7 +33,7 @@ public class ExcelTest
     public void Read02()
     {
         #region pre-process
-        using var excel = TestExcelFile.Read(TEST_FILE);
+        using var excel = TestExcelFile.Read(TestFile);
         var tester = new PrivateMemberTester(excel);
         #endregion
 
@@ -69,7 +69,7 @@ public class ExcelTest
     public void Read03()
     {
         #region pre-process
-        using var excel = TestExcelFile.Read(TEST_FILE);
+        using var excel = TestExcelFile.Read(TestFile);
         var tester = new PrivateMemberTester(excel);
         #endregion
 
@@ -131,7 +131,7 @@ public class ExcelTest
     [TestMethod]
     public void Write01()
     {
-        var dir = $@"{ROOT_DIR}\write1";
+        var dir = $@"{RootDir}\write1";
         var writeFile = $@"{dir}\write.xlsx";
 
         #region pre-process
@@ -152,7 +152,7 @@ public class ExcelTest
     [TestMethod]
     public void Write02()
     {
-        var dir = $@"{ROOT_DIR}\write2";
+        var dir = $@"{RootDir}\write2";
         var writeFile = $@"{dir}\write.xlsx";
 
         #region pre-process
@@ -192,7 +192,7 @@ public class ExcelTest
     [TestMethod]
     public void Write03()
     {
-        var dir = $@"{ROOT_DIR}\write3";
+        var dir = $@"{RootDir}\write3";
         var writeFile = $@"{dir}\write.xlsx";
 
         #region pre-process

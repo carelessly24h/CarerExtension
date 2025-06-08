@@ -1,20 +1,22 @@
-﻿namespace CarerExtensionTest.Utilities.Mutex;
+﻿using CsvHelper.Configuration;
+
+namespace CarerExtensionTest.Utilities.Mutex;
 
 [TestClass]
 public class FileLockerTest
 {
-    private const string ROOT_DIR = @"test\mutex_test";
+    private const string RootDir = @"test\mutex_test";
 
     [ClassInitialize]
     public static void Initialize(TestContext _)
     {
-        Directory.CreateDirectory(ROOT_DIR);
+        Directory.CreateDirectory(RootDir);
     }
 
     [TestMethod]
     public void Dispose01()
     {
-        var dir = $@"{ROOT_DIR}\dispose1";
+        var dir = $@"{RootDir}\dispose1";
         var lockFile = $@"{dir}\lockFile";
 
         #region pre-process
@@ -31,7 +33,7 @@ public class FileLockerTest
     [TestMethod]
     public void Dispose02()
     {
-        var dir = $@"{ROOT_DIR}\dispose2";
+        var dir = $@"{RootDir}\dispose2";
         var lockFile = $@"{dir}\lockFile";
 
         #region pre-process
@@ -53,7 +55,7 @@ public class FileLockerTest
     [TestMethod]
     public void Lock01()
     {
-        var dir = $@"{ROOT_DIR}\lock1";
+        var dir = $@"{RootDir}\lock1";
         var lockFile = $@"{dir}\lockFile";
 
         #region pre-process
@@ -62,5 +64,19 @@ public class FileLockerTest
 
         using var mutex = FileLocker.Lock(lockFile);
         Assert.ThrowsExactly<FileLockException>(() => FileLocker.Lock(lockFile));
+    }
+
+    [TestMethod]
+    public void Lock02()
+    {
+        var dir = $@"{RootDir}\lock2";
+        var lockFile = $@"{dir}\lockFile";
+
+        #region pre-process
+        Directory.CreateDirectory(dir);
+        #endregion
+
+        File.WriteAllText(lockFile, "");
+        using var mutex = FileLocker.Lock(lockFile);
     }
 }

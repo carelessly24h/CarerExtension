@@ -12,6 +12,7 @@ public static class ICellExtension
     /// </summary>
     /// <param name="cell">設定先のセル</param>
     /// <param name="value">設定する値</param>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void SetCellValue(this ICell cell, object? value)
     {
         if (value != null)

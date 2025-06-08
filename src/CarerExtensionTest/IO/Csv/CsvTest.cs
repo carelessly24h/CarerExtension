@@ -3,23 +3,23 @@
 [TestClass]
 public class CsvTest
 {
-    private const string ROOT_DIR = @"test\csv_test";
+    private const string RootDir = @"test\csv_test";
 
     [ClassInitialize]
     public static void Initialize(TestContext _)
     {
-        Directory.CreateDirectory(ROOT_DIR);
+        Directory.CreateDirectory(RootDir);
     }
 
     [TestMethod]
     public void Read01()
     {
-        var dir = $@"{ROOT_DIR}\read1";
+        var dir = $@"{RootDir}\read1";
         var readFile = $@"{dir}\read.csv";
 
         #region pre-process
         Directory.CreateDirectory(dir);
-        File.WriteAllText(readFile, CSV_CONTENT);
+        File.WriteAllText(readFile, CsvContent);
         #endregion
 
         using var csv = TestCsvFile.Read(readFile);
@@ -46,7 +46,7 @@ public class CsvTest
     [TestMethod]
     public void Write01()
     {
-        var dir = $@"{ROOT_DIR}\write1";
+        var dir = $@"{RootDir}\write1";
         var writeFile = $@"{dir}\write.csv";
 
         #region pre-process
@@ -66,13 +66,13 @@ public class CsvTest
     [TestMethod]
     public void Write02()
     {
-        var dir = $@"{ROOT_DIR}\write2";
+        var dir = $@"{RootDir}\write2";
         var readFile = $@"{dir}\read.csv";
         var writeFile = $@"{dir}\write.csv";
 
         #region pre-process
         Directory.CreateDirectory(dir);
-        File.WriteAllText(readFile, CSV_CONTENT);
+        File.WriteAllText(readFile, CsvContent);
         #endregion
 
         using var csv = TestCsvFile.Read(readFile);
@@ -83,7 +83,7 @@ public class CsvTest
         Assert.IsTrue(File.Exists(writeFile));
     }
 
-    private const string CSV_CONTENT = @"intItem,doubleItem,stringItem,dateItem,boolItem
+    private const string CsvContent = @"intItem,doubleItem,stringItem,dateItem,boolItem
 1,1.5,string1,20010101000000,t
 ,2.5,string2,20020202000000,f
 3,,string3,20030303000000,t

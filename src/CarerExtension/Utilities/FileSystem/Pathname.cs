@@ -150,7 +150,7 @@ public readonly struct Pathname(string path)
     /// </summary>
     /// <param name="paths">子要素のパス</param>
     /// <returns>パスを結合した<see cref="Pathname"/>のインスタンス。</returns>
-    public Pathname Combine(Span<string> paths) => new([path, .. paths]);
+    public Pathname Combine(in Span<string> paths) => new([path, .. paths]);
 
     /// <summary>
     /// 文字列を現在のパスに結合します。

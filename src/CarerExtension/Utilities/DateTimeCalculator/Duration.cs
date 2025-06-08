@@ -23,7 +23,7 @@ public readonly record struct Duration(long Ticks)
     /// <param name="Milliseconds">期間のミリ秒</param>
     private record struct DurationParts(int Years, int Months, int Days, int Hours, int Minutes, int Seconds, int Milliseconds)
     {
-        public DurationParts(Span<int> parts) :
+        public DurationParts(in Span<int> parts) :
             this(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5], parts[6])
         { }
     }

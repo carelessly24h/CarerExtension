@@ -14,7 +14,7 @@ public static class StringExtension
     /// <param name="position">取得する位置。</param>
     /// <returns>指定された位置の文字。</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static string At(this string source, Index position) =>
+    public static string At(this string source, in Index position) =>
         source[position].ToString();
 
     /// <summary>
@@ -56,7 +56,7 @@ public static class StringExtension
     /// そうでない場合は<see langword="false"/>。
     /// </returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool EndsWith(this string source, Span<string> suffixes) =>
+    public static bool EndsWith(this string source, in Span<string> suffixes) =>
         suffixes.Any(source.EndsWith);
 
     /// <summary>
@@ -77,7 +77,7 @@ public static class StringExtension
     /// <param name="position">切り取りを開始する文字位置。</param>
     /// <returns>切り取った文字列。</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static string From(this string source, Index position) => source[position..];
+    public static string From(this string source, in Index position) => source[position..];
 
     /// <summary>
     /// 指定した文字列に含まれる文字をエンコードすることによって生成されるバイト数を計算します。
@@ -345,7 +345,7 @@ public static class StringExtension
     /// そうでない場合は<see langword="false"/>。
     /// </returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool StartsWith(this string source, Span<string> prefixes) =>
+    public static bool StartsWith(this string source, in Span<string> prefixes) =>
         prefixes.Any(source.StartsWith);
 
     /// <summary>
@@ -401,7 +401,7 @@ public static class StringExtension
     /// <param name="position">切り出す位置。</param>
     /// <returns>指定した位置までの部分文字列。</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static string To(this string source, Index position)
+    public static string To(this string source, in Index position)
     {
         if (position.IsFromEnd)
         {

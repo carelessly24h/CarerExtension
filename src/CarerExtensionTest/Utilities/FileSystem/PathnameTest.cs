@@ -3,18 +3,18 @@
 [TestClass]
 public class PathnameTest
 {
-    private const string ROOT_DIR = @"test\pathname";
+    private const string RootDir = @"test\pathname";
 
     [ClassInitialize]
     public static void Initialize(TestContext _)
     {
-        Directory.CreateDirectory(ROOT_DIR);
+        Directory.CreateDirectory(RootDir);
     }
 
     [TestMethod]
     public void Children01()
     {
-        var dir = $@"{ROOT_DIR}\child1";
+        var dir = $@"{RootDir}\child1";
 
         #region pre-process
         Directory.CreateDirectory($@"{dir}\a01");
@@ -34,7 +34,7 @@ public class PathnameTest
     [TestMethod]
     public void Children02()
     {
-        var dir = $@"{ROOT_DIR}\child2";
+        var dir = $@"{RootDir}\child2";
 
         #region pre-process
         Directory.CreateDirectory($@"{dir}\a01");
@@ -89,14 +89,14 @@ public class PathnameTest
     {
         #region pre-process
         {
-            var dir = Directory.CreateDirectory(@$"{ROOT_DIR}\copy_to");
+            var dir = Directory.CreateDirectory(@$"{RootDir}\copy_to");
             File.WriteAllText($@"{dir}\test.txt", "");
         }
         #endregion
 
-        var path1 = new Pathname(ROOT_DIR, "copy_to", "test.txt");
-        var path2 = new Pathname(ROOT_DIR, "copy_to", "test2.txt");
-        var path3 = $@"{ROOT_DIR}\copy_to\test3.txt";
+        var path1 = new Pathname(RootDir, "copy_to", "test.txt");
+        var path2 = new Pathname(RootDir, "copy_to", "test2.txt");
+        var path3 = $@"{RootDir}\copy_to\test3.txt";
 
         Assert.IsFalse(File.Exists(path2.ToString()));
         Assert.IsFalse(File.Exists(path3));
@@ -111,8 +111,8 @@ public class PathnameTest
     [TestMethod]
     public void CreateDirectory01()
     {
-        var path1 = new Pathname(ROOT_DIR, "create_dir1");
-        var path2 = new Pathname(ROOT_DIR, @"create_dir2\");
+        var path1 = new Pathname(RootDir, "create_dir1");
+        var path2 = new Pathname(RootDir, @"create_dir2\");
 
         Assert.IsFalse(Directory.Exists(path1.ToString()));
         Assert.IsFalse(Directory.Exists(path2.ToString()));
@@ -127,7 +127,7 @@ public class PathnameTest
     [TestMethod]
     public void Delete01()
     {
-        var dir = $@"{ROOT_DIR}\delete1";
+        var dir = $@"{RootDir}\delete1";
 
         #region pre-process
         {
@@ -147,7 +147,7 @@ public class PathnameTest
     [TestMethod]
     public void Delete02()
     {
-        var file = $@"{ROOT_DIR}\delete2.txt";
+        var file = $@"{RootDir}\delete2.txt";
 
         #region pre-process
         File.WriteAllText(file, "");
@@ -166,12 +166,12 @@ public class PathnameTest
     public void DeleteDirectory01()
     {
         #region pre-process
-        Directory.CreateDirectory($@"{ROOT_DIR}\delete_dir1");
-        Directory.CreateDirectory($@"{ROOT_DIR}\delete_dir2");
+        Directory.CreateDirectory($@"{RootDir}\delete_dir1");
+        Directory.CreateDirectory($@"{RootDir}\delete_dir2");
         #endregion
 
-        var path1 = new Pathname(ROOT_DIR, "delete_dir1");
-        var path2 = new Pathname(ROOT_DIR, @"delete_dir2\");
+        var path1 = new Pathname(RootDir, "delete_dir1");
+        var path2 = new Pathname(RootDir, @"delete_dir2\");
 
         Assert.IsTrue(Directory.Exists(path1.ToString()));
         Assert.IsTrue(Directory.Exists(path2.ToString()));
@@ -186,7 +186,7 @@ public class PathnameTest
     [TestMethod]
     public void DeleteFile01()
     {
-        var dir = $@"{ROOT_DIR}\delete_file1";
+        var dir = $@"{RootDir}\delete_file1";
 
         #region pre-process
         {
@@ -212,7 +212,7 @@ public class PathnameTest
     [TestMethod]
     public void Empty01()
     {
-        var baseDir = $@"{ROOT_DIR}\empty1";
+        var baseDir = $@"{RootDir}\empty1";
         var dir = $@"{baseDir}\directory1";
         var file = $@"{baseDir}\test1.txt";
 
@@ -237,7 +237,7 @@ public class PathnameTest
     [TestMethod]
     public void EnumerateDirectories01()
     {
-        var dir = $@"{ROOT_DIR}\enumDir1";
+        var dir = $@"{RootDir}\enumDir1";
 
         #region pre-process
         Directory.CreateDirectory($@"{dir}\a01\aa01");
@@ -265,7 +265,7 @@ public class PathnameTest
     [TestMethod]
     public void EnumerateDirectories02()
     {
-        var dir = $@"{ROOT_DIR}\enumDir2";
+        var dir = $@"{RootDir}\enumDir2";
 
         #region pre-process
         Directory.CreateDirectory($@"{dir}\a01\aa01");
@@ -286,7 +286,7 @@ public class PathnameTest
     [TestMethod]
     public void EnumerateFiles01()
     {
-        var baseDir = $@"{ROOT_DIR}\enumFile1";
+        var baseDir = $@"{RootDir}\enumFile1";
         var dir = $@"{baseDir}\a01";
 
         #region pre-process
@@ -314,7 +314,7 @@ public class PathnameTest
     [TestMethod]
     public void EnumerateFiles02()
     {
-        var baseDir = $@"{ROOT_DIR}\enumFile2";
+        var baseDir = $@"{RootDir}\enumFile2";
         var dir = $@"{baseDir}\a01";
 
         #region pre-process
@@ -369,7 +369,7 @@ public class PathnameTest
     [TestMethod]
     public void MoveTo01()
     {
-        var dir = @$"{ROOT_DIR}\move_to1";
+        var dir = @$"{RootDir}\move_to1";
 
         #region pre-process
         Directory.CreateDirectory(dir);
@@ -391,7 +391,7 @@ public class PathnameTest
     [TestMethod]
     public void MoveTo02()
     {
-        var dir = @$"{ROOT_DIR}\move_to2";
+        var dir = @$"{RootDir}\move_to2";
 
         #region pre-process
         Directory.CreateDirectory(dir);
@@ -456,7 +456,7 @@ public class PathnameTest
     [TestMethod]
     public void Properties02()
     {
-        var dir = $@"{ROOT_DIR}\property02";
+        var dir = $@"{RootDir}\property02";
 
         #region pre-process
         Directory.CreateDirectory(dir);
@@ -480,7 +480,7 @@ public class PathnameTest
     [TestMethod]
     public void Read01()
     {
-        var dir = $@"{ROOT_DIR}\read1";
+        var dir = $@"{RootDir}\read1";
         var txtFile = $@"{dir}\test1.txt";
         var binFile = $@"{dir}\test1.bin";
 
@@ -507,7 +507,7 @@ public class PathnameTest
     [TestMethod]
     public void Write01()
     {
-        var dir = $@"{ROOT_DIR}\write1";
+        var dir = $@"{RootDir}\write1";
         var txtFile = $@"{dir}\test1.txt";
         var binFile = $@"{dir}\test1.bin";
 

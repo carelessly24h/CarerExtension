@@ -6,7 +6,7 @@
 /// <typeparam name="T">チャンクの要素の型。この型パラメータは共変です。</typeparam>
 public sealed class Chunking<T> : IChunking<T>
 {
-    #region プロパティ
+    #region properties
     /// <summary>
     /// チャンクを表すコレクションを取得します。
     /// </summary>
@@ -24,7 +24,7 @@ public sealed class Chunking<T> : IChunking<T>
     public int Length { get; }
     #endregion
 
-    #region コンストラクタ
+    #region constructors
     /// <summary>
     /// コレクションの一部のチャンクを表す新しいインスタンスを初期化します。
     /// </summary>
@@ -38,6 +38,7 @@ public sealed class Chunking<T> : IChunking<T>
     }
     #endregion
 
+    #region methods
     /// <summary>
     /// コレクションの一部のチャンクを表す新しいインスタンスを初期化します。
     /// </summary>
@@ -72,4 +73,5 @@ public sealed class Chunking<T> : IChunking<T>
     /// </summary>
     /// <returns>コレクションを反復処理するために使用できる IEnumerator オブジェクト。</returns>
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+    #endregion
 }

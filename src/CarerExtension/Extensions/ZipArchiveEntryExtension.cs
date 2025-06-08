@@ -11,10 +11,10 @@ public static class ZipArchiveEntryExtension
     /// <param name="entry">データを書き込むZipアーカイブ。</param>
     /// <param name="buffer">書き込むデータ。</param>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void Write(this ZipArchiveEntry entry, byte[] buffer)
+    public static void Write(this ZipArchiveEntry entry, in Span<byte> buffer)
     {
         using var stream = entry.Open();
-        stream.Write(buffer, 0, buffer.Length);
+        stream.Write(buffer);
     }
 
     /// <summary>

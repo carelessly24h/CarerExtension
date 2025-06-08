@@ -39,7 +39,7 @@ public record struct PdfSection(double Top, double Left, double Right, double Bo
     /// <param name="margin">PDFのマージン。</param>
     /// <param name="headerHeight">ヘッダの高さ。</param>
     /// <returns>指定されたパラメータでサイズを計算した、ヘッダーのセクション。</returns>
-    public static PdfSection ToHeader(PdfPage page, Margin margin, double headerHeight)
+    public static PdfSection ToHeader(PdfPage page, in Margin margin, double headerHeight)
     {
         var headerWidth = CalculatePageWidth(page, margin);
 
@@ -58,7 +58,7 @@ public record struct PdfSection(double Top, double Left, double Right, double Bo
     /// <param name="headerHeight">ヘッダの高さ。</param>
     /// <param name="footerHeight">フッターの高さ。</param>
     /// <returns>指定されたパラメータでサイズを計算した、PDF本文のセクション。</returns>
-    public static PdfSection ToBody(PdfPage page, Margin margin, double headerHeight, double footerHeight)
+    public static PdfSection ToBody(PdfPage page, in Margin margin, double headerHeight, double footerHeight)
     {
         var bodyTop = CalculateBodyTop(margin, headerHeight);
         var bodyHeight = CalculateBodyHeight(page, margin, headerHeight, footerHeight);
@@ -79,7 +79,7 @@ public record struct PdfSection(double Top, double Left, double Right, double Bo
     /// <param name="headerHeight">ヘッダの高さ。</param>
     /// <param name="footerHeight">フッターの高さ。</param>
     /// <returns>指定されたパラメータでサイズを計算した、フッターのセクション。</returns>
-    public static PdfSection ToFooter(PdfPage page, Margin margin, double headerHeight, double footerHeight)
+    public static PdfSection ToFooter(PdfPage page, in Margin margin, double headerHeight, double footerHeight)
     {
         var bodyTop = CalculateBodyTop(margin, headerHeight);
         var bodyHeight = CalculateBodyHeight(page, margin, headerHeight, footerHeight);
@@ -98,7 +98,7 @@ public record struct PdfSection(double Top, double Left, double Right, double Bo
     /// <param name="margin">PDFのマージン。</param>
     /// <param name="headerHeight">ヘッダの高さ。</param>
     /// <returns>計算した本文のセクションの上端位置。</returns>
-    public static double CalculateBodyTop(Margin margin, double headerHeight) =>
+    public static double CalculateBodyTop(in Margin margin, double headerHeight) =>
         margin.Top + headerHeight;
 
     /// <summary>
@@ -109,7 +109,7 @@ public record struct PdfSection(double Top, double Left, double Right, double Bo
     /// <param name="headerHeight">ヘッダの高さ。</param>
     /// <param name="footerHeight">フッターの高さ。</param>
     /// <returns>計算した本文のセクションの高さ</returns>
-    public static double CalculateBodyHeight(PdfPage page, Margin margin, double headerHeight, double footerHeight) =>
+    public static double CalculateBodyHeight(PdfPage page, in Margin margin, double headerHeight, double footerHeight) =>
         page.Height.Point - (margin.Top + margin.Bottom + headerHeight + footerHeight);
 
     /// <summary>
@@ -118,7 +118,7 @@ public record struct PdfSection(double Top, double Left, double Right, double Bo
     /// <param name="page">PDFのページ</param>
     /// <param name="margin">PDFのマージン</param>
     /// <returns>計算したページの幅。</returns>
-    public static double CalculatePageWidth(PdfPage page, Margin margin) =>
+    public static double CalculatePageWidth(PdfPage page, in Margin margin) =>
         page.Width.Point - (margin.Left + margin.Right);
     #endregion
 }

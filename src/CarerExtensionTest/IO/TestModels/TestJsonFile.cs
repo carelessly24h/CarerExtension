@@ -26,16 +26,16 @@ internal class TestJsonFile : JsonIO<TestJsonFile>
 
     public class DateTimeConverter : JsonConverter<DateTime>
     {
-        private const string FORMAT = "yyyyMMddHHmmss";
+        private const string format = "yyyyMMddHHmmss";
 
         public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
             reader.GetString() switch
             {
-                string v => v.ToDateTimeOrDefault(FORMAT) ?? DateTime.MinValue,
+                string v => v.ToDateTimeOrDefault(format) ?? DateTime.MinValue,
                 _ => DateTime.MinValue,
             };
 
         public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options) =>
-            writer.WriteStringValue(value.ToString(FORMAT));
+            writer.WriteStringValue(value.ToString(format));
     }
 }

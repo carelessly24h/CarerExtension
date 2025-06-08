@@ -1,6 +1,4 @@
-﻿using PdfSharp;
-
-namespace CarerExtensionTest.IO.Pdf;
+﻿namespace CarerExtensionTest.IO.Pdf;
 
 [TestClass]
 public class PdfTest
