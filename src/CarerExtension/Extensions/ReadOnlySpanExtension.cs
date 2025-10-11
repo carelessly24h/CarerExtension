@@ -18,9 +18,10 @@ public static class ReadOnlySpanExtension
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool All<T>(this ReadOnlySpan<T> source, Func<T, bool> predicate)
     {
-        foreach (var value in source)
+        // use `for` for performance.
+        for (var i = 0; i < source.Length; i++)
         {
-            if (!predicate(value))
+            if (!predicate(source[i]))
             {
                 return false;
             }
@@ -54,9 +55,10 @@ public static class ReadOnlySpanExtension
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool Any<T>(this ReadOnlySpan<T> source, Func<T, bool> predicate)
     {
-        foreach (var value in source)
+        // use `for` for performance.
+        for (var i = 0; i < source.Length; i++)
         {
-            if (predicate(value))
+            if (predicate(source[i]))
             {
                 return true;
             }

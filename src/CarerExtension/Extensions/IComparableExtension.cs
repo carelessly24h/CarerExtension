@@ -19,42 +19,15 @@ public static class IComparableExtension
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T Clamp<T>(this T value, T limit1, T limit2) where T : IComparable
     {
-        var isMinLimit1 = limit1.CompareTo(limit2);
-        if (isMinLimit1 < 0)
-        {
-            return DoClamp(value, limit1, limit2);
-        }
-        else
-        {
-            return DoClamp(value, limit2, limit1);
-        }
-    }
+        var minLimit = limit1.CompareTo(limit2) < 0 ? limit1 : limit2;
+        var maxLimit = limit1.CompareTo(limit2) < 0 ? limit2 : limit1;
 
-    /// <summary>。
-    /// レシーバの値を範囲内に収めます
-    /// </summary>
-    /// <typeparam name="T">レシーバの値の型</typeparam>
-    /// <param name="value">チェックする値。</param>
-    /// <param name="min">範囲の下限を表す数値。</param>
-    /// <param name="max">範囲の上限を表す数値。</param>
-    /// <returns>
-    /// レシーバが<paramref name="min"/>よりも小さい場合は<paramref name="min"/>。
-    /// レシーバが<paramref name="max"/>よりも大きい場合は<paramref name="max"/>。
-    /// そうでない場合はレシーバの値を返します。
-    /// </returns>
-    private static T DoClamp<T>(this T value, T min, T max) where T : IComparable
-    {
-        var minResult = value.CompareTo(min);
-        if (minResult <= 0)
+        return value switch
         {
-            return min;
-        }
-        var maxResult = value.CompareTo(max);
-        if (maxResult >= 0)
-        {
-            return max;
-        }
-        return value;
+            var v when v.CompareTo(minLimit) < 0 => minLimit,
+            var v when v.CompareTo(maxLimit) > 0 => maxLimit,
+            _ => value,
+        };
     }
 
     /// <summary>

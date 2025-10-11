@@ -6,7 +6,6 @@ global using CarerExtension.IO.Json;
 global using CarerExtension.IO.Xml;
 global using CarerExtension.IO.Yaml;
 global using CarerExtension.Utilities.Compression.Zip;
-global using CarerExtension.Utilities.DateTimeCalculator;
 global using CarerExtension.Utilities.FileSystem;
 global using CarerExtension.Utilities.LegacyDataFormatter;
 global using CarerExtension.Utilities.Mutex;

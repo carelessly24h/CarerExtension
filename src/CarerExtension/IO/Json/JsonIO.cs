@@ -10,7 +10,7 @@ public abstract class JsonIO<T> where T : JsonIO<T>, new()
     /// <summary>
     /// ファイルのデフォルトエンコード
     /// </summary>
-    protected static readonly Encoding DEFAULT_ENCODING = Encoding.UTF8;
+    protected static readonly Encoding defaultEncoding = Encoding.UTF8;
     #endregion
 
     #region method
@@ -24,7 +24,7 @@ public abstract class JsonIO<T> where T : JsonIO<T>, new()
     /// <param name="path">読み込みファイルパス</param>
     /// <returns>読み込んだJSONファイル</returns>
     public static T Read(string path) =>
-        Read(path, DEFAULT_ENCODING, ReadConfigure());
+        Read(path, defaultEncoding, ReadConfigure());
 
     /// <summary>
     /// ファイルを読み込む
@@ -37,6 +37,16 @@ public abstract class JsonIO<T> where T : JsonIO<T>, new()
     /// <returns>読み込んだJSONファイル</returns>
     public static T Read(string path, Encoding encoding) =>
         Read(path, encoding, ReadConfigure());
+
+    /// <summary>
+    /// ファイルを読み込む
+    /// </summary>
+    /// <param name="path">読み込みファイルパス</param>
+    /// <param name="encoding">ファイルのエンコード</param>
+    /// <param name="options">読み込み設定</param>
+    /// <returns>読み込んだJSONファイル</returns>
+    public static T Read(string path, JsonSerializerOptions options) =>
+        Read(path, defaultEncoding, options);
 
     /// <summary>
     /// ファイルを読み込む
@@ -74,7 +84,7 @@ public abstract class JsonIO<T> where T : JsonIO<T>, new()
     /// </remarks>
     /// <param name="path">出力先ファイルパス</param>
     public virtual void Write(string path) =>
-        Write(path, DEFAULT_ENCODING, WriteConfigure());
+        Write(path, defaultEncoding, WriteConfigure());
 
     /// <summary>
     /// ファイルに書き込む
