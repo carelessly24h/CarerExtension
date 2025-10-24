@@ -1,4 +1,6 @@
-﻿global using CarerExtension.Extensions;
+﻿global using CarerConsole;
+global using CarerConsole.Data;
+global using CarerExtension.Extensions;
 global using CarerExtension.IO.Csv;
 global using CarerExtension.IO.Excel;
 global using CarerExtension.IO.Excel.Attributes;

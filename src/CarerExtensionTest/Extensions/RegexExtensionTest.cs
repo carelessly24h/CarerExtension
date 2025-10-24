@@ -4,7 +4,6 @@
 public class RegexExtensionTest
 {
     [TestMethod]
-    [SuppressMessage("Performance", "SYSLIB1045:'GeneratedRegexAttribute' に変換します。", Justification = "<保留中>")]
     public void IsMultiLine01()
     {
         {

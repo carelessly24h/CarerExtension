@@ -24,7 +24,7 @@ public class CsvTest
 
         using var csv = TestCsvFile.Read(readFile);
 
-        Assert.AreEqual(6, csv.Rows.Count);
+        Assert.HasCount(6, csv.Rows);
         {
             var row = csv.Rows[0];
             Assert.AreEqual(1, row.IntValue);

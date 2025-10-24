@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
-		<ImplicitUsings>enable</ImplicitUsings>
+		<TargetFramework>net9.0</TargetFramework>
+		<ImplicitUsings>disable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 
 		<IsPackable>false</IsPackable>
@@ -14,25 +14,14 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.0" />
-		<PackageReference Include="Microsoft.Playwright.MSTest" Version="1.52.0" />
-		<PackageReference Include="MSTest.TestAdapter" Version="3.9.1" />
-		<PackageReference Include="MSTest.TestFramework" Version="3.9.1" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.0" />
+		<PackageReference Include="Microsoft.Playwright.MSTest" Version="1.55.0" />
+		<PackageReference Include="MSTest.TestAdapter" Version="4.0.1" />
+		<PackageReference Include="MSTest.TestFramework" Version="4.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Using Include=" System.Reflection" />
-		<Using Include="Microsoft.Playwright.MSTest" />
-		<Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
-		<Using Include="System.Diagnostics.CodeAnalysis" />
-		<Using Include="System.IO.Compression" />
-		<Using Include="System.Text.Json" />
-		<Using Include="System.Text.Json.Serialization" />
-		<Using Include="System.Text.RegularExpressions" />
-		<Using Include="System.Threading.Tasks" />
-	</ItemGroup>
-
-	<ItemGroup>
+		<ProjectReference Include="..\CarerConsole\CarerConsole.csproj" />
 		<ProjectReference Include="..\CarerExtension\CarerExtension.csproj" />
 	</ItemGroup>
 

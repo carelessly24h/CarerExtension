@@ -24,7 +24,7 @@ public class TolerantCsvTest
 
         using var csv = TestCsvFile.Read(readFile);
 
-        Assert.AreEqual(6, csv.Rows.Count);
+        Assert.HasCount(6, csv.Rows);
         {
             var row = csv.Rows[0];
             Assert.AreEqual(1, row.IntValue);
@@ -55,7 +55,7 @@ public class TolerantCsvTest
         #endregion
 
         using var csv = TestTolerantCsvFile.Read(readFile);
-        Assert.AreEqual(0, csv.Rows.Count);
+        Assert.IsEmpty(csv.Rows);
     }
 
     [TestMethod]

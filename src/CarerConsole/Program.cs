@@ -1,0 +1,1 @@
+﻿AppSetup.Run(args);

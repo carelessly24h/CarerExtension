@@ -37,7 +37,7 @@ internal class PdfFontResolver : IFontResolver
     public static byte[] LoadFontFromResource(Stream stream)
     {
         var data = new byte[stream.Length];
-        stream.Read(data, 0, data.Length);
+        stream.ReadExactly(data);
         return data;
     }
 

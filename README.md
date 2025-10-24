@@ -12,7 +12,7 @@ If this project violates your rights then I will deal with it immediately.
 ## Env
 
 - VS2022
-- .NET 8.0
+- .NET 9.0
 
 ## Using packages
 
@@ -22,3 +22,7 @@ Thank you very much.
 - NPOI
 - PDFsharp
 - YamlDotNet
+- Microsoft.EntityFrameworkCore
+- Microsoft.Extensions
+- SQLitePCLRaw.bundle_e_sqlite3
+- coverlet.collector

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarerExtensionTest", "Carer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarerExtension", "CarerExtension\CarerExtension.csproj", "{4D78F01E-9D96-42F9-9611-0DAEE5425CFB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarerConsole", "CarerConsole\CarerConsole.csproj", "{DBC9784F-DADC-4CD9-890C-A2EC8A4292E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{4D78F01E-9D96-42F9-9611-0DAEE5425CFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D78F01E-9D96-42F9-9611-0DAEE5425CFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D78F01E-9D96-42F9-9611-0DAEE5425CFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBC9784F-DADC-4CD9-890C-A2EC8A4292E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBC9784F-DADC-4CD9-890C-A2EC8A4292E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBC9784F-DADC-4CD9-890C-A2EC8A4292E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBC9784F-DADC-4CD9-890C-A2EC8A4292E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
