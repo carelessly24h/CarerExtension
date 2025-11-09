@@ -28,7 +28,6 @@ public class AppSetupTest
     [TestMethod]
     public void RunTest()
     {
-        var path = Assembly.GetExecutingAssembly().Location;
         AppSetup.Run([]);
 
         var corporations = dbContext.Corporations;
@@ -50,5 +49,11 @@ public class AppSetupTest
             Assert.AreEqual("USER1", name);
             Assert.AreEqual(10, age);
         }
+    }
+
+    [TestMethod]
+    public void AppSettingsFilePathTest()
+    {
+        // todo
     }
 }

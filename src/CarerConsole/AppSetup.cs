@@ -15,14 +15,10 @@ public class AppSetup
             .ConfigureAppConfiguration((hostContext, configApp) =>
             {
                 var env = hostContext.HostingEnvironment;
-
                 // Reading appsettings.json.
-                configApp.AddJsonFile(@"Configs\appsettings.json", optional: false, reloadOnChange: false);
-                if (env.IsDevelopment())
-                {
-                    configApp.AddJsonFile(@$"Configs\appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: false);
-                }
-
+                configApp
+                    .AddJsonFile(@"Configs\appsettings.json", optional: false, reloadOnChange: false)
+                    .AddJsonFile(@$"Configs\appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: false);
                 // Environment variables reading.
                 configApp.AddEnvironmentVariables();
             })

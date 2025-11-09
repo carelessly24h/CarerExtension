@@ -11,5 +11,7 @@ global using CarerExtension.Utilities.Compression.Zip;
 global using CarerExtension.Utilities.FileSystem;
 global using CarerExtension.Utilities.LegacyDataFormatter;
 global using CarerExtension.Utilities.Mutex;
+global using CarerExtension.Utilities.Threading.Tasks;
+global using CarerExtension.Utilities.Threading.Tasks.Arguments;
 global using CarerExtensionTest.IO.TestModels;
 global using CarerExtensionTest.IO.TestModels.Assets;
